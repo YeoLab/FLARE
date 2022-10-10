@@ -1,17 +1,16 @@
-# STAMP Pipelines
+# FLARE
 
-For folks using tscc the Yeo lab, all required libraries for running the snakemake jobs comprising this suite of STAMP analysis tools can be loaded with the command
-```
-    module load stamp
-```
+### FLagging Areas of RNA-editing Enrichment (FLARE) 
 
-For others:
+We present FLagging Areas of RNA-editing Enrichment (FLARE),  a Snakemake-based pipeline that uses a statistical approach to determine regions of enriched RNA editing, using SAILOR-derived editing sites as a starting point. FLARE is configurable for use with any type of base pair change – we include with this release of FLARE an update of SAILOR to enable detection of all edit types.
+
+# Requirements
 
 * Your system must be at least Linux Centos7
 
 * Make sure that the environment your STAMP processing pipelines will be running on have snakemake installed (https://snakemake.readthedocs.io/en/v5.6.0/getting_started/installation.html). 
 
-* You also will need to have singularity installed for several steps of the pipeline to work. We have created singularity images containing all necessary python packages that will automatically be loaded for you in the course of running the pipeline, as long as your system has singularity installed.
+* You also will need to have Singularity installed for several steps of the pipeline to work. We have created singularity images containing all necessary python packages that will automatically be loaded for you in the course of running the pipeline, as long as your system has singularity installed.
 
 # Running the SAILOR snakemake pipeline
 
