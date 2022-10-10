@@ -1,0 +1,346 @@
+import os
+import sys
+
+args = sys.argv
+print('args are ', args)
+
+
+def get_val_from_args(val_names):
+    val_tags = ['--{}'.format(v) for v in val_names] + ['-{}'.format(v) for v in val_names]
+    print(val_tags)
+    
+    val_present = None
+    for val_tag in val_tags:
+        for arg in args:
+            if val_tag == arg:
+                val_present = val_tag
+                print('Found {}'.format(val_tag))
+                break
+    if not val_present:
+        print("Could not find {} in args".format(val_names))
+        return None
+    
+    val = args[args.index(val_present) + 1]
+    print('{} is {}'.format(val_present, val))
+    
+    snakemake_directory = '/'.join(val.rstrip('/').split('/')[:-2])
+    print('STAMP directory is {}'.format(snakemake_directory))
+
+    return snakemake_directory
+
+
+snakemake_directory = get_val_from_args(['snakefile', 's', 'profile'])
+scripts_directory='{}/workflow_sailor/scripts/'.format(snakemake_directory)
+print("Scripts directory is {}".format(scripts_directory))
+
+strands = ["fwd", "rev"]
+
+# Set default values for options that are unlikely to change 
+# (but can be overriden in the sailor config if so desired)
+default_values = {
+    "edit_fraction": 0.01,
+    "alpha": 0,
+    "beta": 0,
+    "remove_duplicates": False,
+    "junction_overhang": 10,
+    "edge_mutation": 5,
+    "dp": "DP4", 
+    "min_variant_coverage": 5,
+    "keep_all_edited": False,
+    "mm_tolerance": 1
+}
+
+for k,v in default_values.items():
+    if k not in config:
+        print("Did not find {} in config, setting to {}".format(k, v))
+        config[k] = v
+
+# Confirm appropriate edit type specified
+config["edit_type"] = config["edit_type"].upper()
+allowed_edit_types = ["CT", "CA", "CG", "TA", "TG", "TC", "GT", "GA", "GC", "AC", "AG", "AT"]
+if config["edit_type"] not in allowed_edit_types:
+    print("edit_type parameter must be one of {}".format(allowed_edit_types))
+    sys.exit(0)
+
+
+rule all:
+    input:
+        bw_fwd=expand(os.path.join(config["output_dir"], "8_bw_and_bam", "{sample}.fwd.sorted.bw"), sample=config["samples"]),
+        bw_rev=expand(os.path.join(config["output_dir"], "8_bw_and_bam", "{sample}.fwd.sorted.bw"), sample=config["samples"]),
+        combined_filtered_bam=expand(os.path.join(config["output_dir"], "8_bw_and_bam", "{sample}_filtered_merged.sorted.bam"), sample=config["samples"]),
+        edit_fraction_bedgraph=expand(os.path.join(config["output_dir"], "9_edit_fraction_bedgraphs", "{sample}.edit_fraction.bedgraph"), sample=config["samples"]),
+        combined=expand(os.path.join(config["output_dir"], "{sample}.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed"), sample=config["samples"])
+        
+rule index_bam:
+    input:
+        input_bam=os.path.join(config["samples_path"], "{sample}")
+    output:
+        index=os.path.join(config["samples_path"], "{sample}.bai")
+    params:
+        run_time="2:00:00",
+        threads="1"
+    singularity:
+        "docker://brianyee/samtools:1.3.1"
+    shell:
+        "samtools index {input.input_bam}"
+ 
+ 
+rule split_strands:
+    input: 
+        input_bam=os.path.join(config["samples_path"], "{sample}"),
+        index=os.path.join(config["samples_path"], "{sample}.bai")
+    output: 
+        output_fwd=os.path.join(config["output_dir"], "1_split_strands", "{sample}.fwd.bam"),
+        output_rev=os.path.join(config["output_dir"], "1_split_strands", "{sample}.rev.bam")
+    params:
+        reverse_stranded=config["reverse_stranded"],
+        run_time="4:00:00",
+        threads="1"
+    singularity:
+        "docker://brianyee/sailor:1.99.0"
+    shell:
+        """
+        python -c 'import sys; print(sys.prefix); print(sys.path)' > env_debug.out
+        if [ {params.reverse_stranded} = False ] ; then
+            python {scripts_directory}/split_strands.py -i {input.input_bam} -f {output.output_fwd} -r {output.output_rev}
+        else
+            python {scripts_directory}/split_strands.py --reverse-strand -i {input.input_bam} -f {output.output_fwd} -r {output.output_rev}
+        fi
+        """
+        
+        
+rule collapse_reads:
+    input: 
+        bam=os.path.join(config["output_dir"], "1_split_strands", "{sample}.{strands}.bam")
+    output:
+        bam=os.path.join(config["output_dir"], "2_collapse_reads", "{sample}.{strands}.rmDup.bam")
+    params:
+        run_time="6:00:00",
+        threads="1",
+        library=config["library"] if "library" in config.keys() else "single"  # default is single
+    singularity:
+        "docker://brianyee/samtools:1.3.1"
+    shell: 
+        """
+        if [ {params.library} = paired ] ; then
+            samtools rmdup {input.bam} {output.bam}
+        else
+            samtools rmdup -S {input.bam} {output.bam}
+        fi
+        """
+        
+
+rule index_reads:
+    input:
+        bam=os.path.join(config["output_dir"], "2_collapse_reads", "{sample}.{strands}.rmDup.bam") \
+            if config["remove_duplicates"] \
+            else os.path.join(config["output_dir"], "1_split_strands", "{sample}.{strands}.bam")
+    output:
+        bai=os.path.join(config["output_dir"], "3_index_reads", "{sample}.{strands}.bam.bai"),
+        bam=os.path.join(config["output_dir"], "3_index_reads", "{sample}.{strands}.bam")
+    params:
+        run_time="2:00:00",
+        threads="1"
+    singularity:
+        "docker://brianyee/samtools:1.3.1"
+    shell:
+        "samtools index {input.bam} {output.bai}; cp {input.bam} {output.bam}"
+        
+rule make_bigwigs:
+    input:
+        fwd_bam=os.path.join(config["output_dir"], "4_filter_reads", "{sample}.fwd.readfiltered.bam"),
+        rev_bam=os.path.join(config["output_dir"], "4_filter_reads", "{sample}.rev.readfiltered.bam"),
+        reference_fasta=config["reference_fasta"]
+    output:
+        bw_fwd=os.path.join(config["output_dir"], "8_bw_and_bam", "{sample}.fwd.sorted.bw"),
+        bw_rev=os.path.join(config["output_dir"], "8_bw_and_bam", "{sample}.rev.sorted.bw"),
+        combined_filtered_bam=os.path.join(config["output_dir"], "8_bw_and_bam", "{sample}_filtered_merged.sorted.bam")
+    params:
+        run_time="1:00:00",
+        threads="1",
+        output_folder=os.path.join(config["output_dir"], "8_bw_and_bam"),
+        sample="{sample}"
+    singularity:
+        "docker://ekofman/editc:v3"
+    shell:
+        """
+        # join bams
+        samtools merge {params.output_folder}/{params.sample}_filtered_merged.bam {input.fwd_bam} {input.rev_bam} -f;
+        
+        # sort merged bam
+        samtools sort -o {params.output_folder}/{params.sample}_filtered_merged.sorted.bam {params.output_folder}/{params.sample}_filtered_merged.bam;
+        
+        # index joined bam
+        samtools index {params.output_folder}/{params.sample}_filtered_merged.sorted.bam;
+        
+        {scripts_directory}/bam_to_bw.sh {params.output_folder}/{params.sample}_filtered_merged.sorted.bam {params.sample} {input.reference_fasta} {params.output_folder};
+        """
+
+rule filter_reads:
+    input: 
+        bam=os.path.join(config["output_dir"], "3_index_reads", "{sample}.{strands}.bam")
+    output:
+        bam=os.path.join(config["output_dir"], "4_filter_reads", "{sample}.{strands}.readfiltered.bam")
+    params:
+        junction_overhang=config["junction_overhang"],
+        edge_mutation=config["edge_mutation"],
+        mm_tolerance=config["mm_tolerance"],
+        reverse_stranded=config["reverse_stranded"],
+        run_time="5:00:00",
+        threads="1",
+        edit_type=config["edit_type"]
+    singularity:
+        "docker://brianyee/sailor:1.99.0"
+    shell:
+        """
+        {scripts_directory}/filter_reads.py -i {input.bam} -o {output.bam} --junction_overhang {params.junction_overhang} --edge_mutation {params.edge_mutation} --mm_tolerance {params.mm_tolerance} --edit_type {params.edit_type} --reverse_stranded {params.reverse_stranded}
+        """
+
+rule mpileup:
+    input:
+        bam=os.path.join(config["output_dir"], "4_filter_reads", "{sample}.{strands}.readfiltered.bam")
+    output: 
+        gbcf=os.path.join(config["output_dir"], "5_pileup_reads", "{sample}.{strands}.readfiltered.gbcf")
+    params:
+        reference_fasta=config["reference_fasta"],
+        run_time="9:00:00",
+        threads="1"
+    singularity:
+        "docker://brianyee/samtools:1.3.1"
+    shell: 
+        "samtools mpileup -R -o {output.gbcf} -d 100000000 -E -f {params.reference_fasta} -p -t DP,DV,DPR,INFO/DPR,DP4,SP -g -I {input.bam}"
+        
+rule call_snvs:
+    input: 
+        gbcf=os.path.join(config["output_dir"], "5_pileup_reads", "{sample}.{strands}.readfiltered.gbcf")
+    output:
+        vcf=os.path.join(config["output_dir"], "6_vcfs", "{sample}.{strands}.readfiltered.vcf")
+    params:
+        run_time="4:00:00",
+        threads="1"
+    singularity:
+        "docker://brianyee/bcftools:1.2"
+    shell:
+        "bcftools view -o {output.vcf} {input.gbcf} -v snps -O v"
+        
+rule format_variants:
+    input:
+        vcf=os.path.join(config["output_dir"], "6_vcfs", "{sample}.{strands}.readfiltered.vcf")
+    output:
+        fo_vcf=os.path.join(config["output_dir"], "6_vcfs", "{sample}.{strands}.readfiltered.formatted.vcf")
+    params:
+        run_time="4:00:00",
+        threads="1"
+    singularity:
+        "docker://brianyee/bcftools:1.2"
+    shell:
+        "bcftools call -o {output.fo_vcf} {input.vcf} -c -O v -A"
+
+rule filter_variants_fwd:
+    input:
+        fo_vcf=os.path.join(config["output_dir"], "6_vcfs", "{sample}.fwd.readfiltered.formatted.vcf")
+    output:
+        fi_vcf=os.path.join(config["output_dir"], "6_vcfs", "{sample}.fwd.readfiltered.formatted.varfiltered.vcf")
+    params:
+        min_variant_coverage=config["min_variant_coverage"],
+        dp=config["dp"],
+        run_time="4:00:00",
+        threads="1",
+        edit_type=config["edit_type"]
+    singularity:
+        "docker://brianyee/sailor:1.99.0"
+    shell:
+        """
+        {scripts_directory}/filter_variants.py -o {output.fi_vcf} -i {input.fo_vcf} -m {params.min_variant_coverage} --dp {params.dp} --edit_type {params.edit_type}
+        """
+        
+rule filter_variants_rev:
+    input:
+        fo_vcf=os.path.join(config["output_dir"], "6_vcfs", "{sample}.rev.readfiltered.formatted.vcf")
+    output:
+        fi_vcf=os.path.join(config["output_dir"], "6_vcfs", "{sample}.rev.readfiltered.formatted.varfiltered.vcf")
+    params:
+        min_variant_coverage=config["min_variant_coverage"],
+        dp=config["dp"],
+        run_time="4:00:00",
+        threads="1",
+        edit_type=config["edit_type"] if "edit_type" in config.keys() else "ct"
+    singularity:
+        "docker://brianyee/sailor:1.99.0"
+    shell:
+        """
+        {scripts_directory}/filter_variants.py -o {output.fi_vcf} -i {input.fo_vcf} -m {params.min_variant_coverage} --dp {params.dp} --reverse-split --edit_type {params.edit_type}
+        """
+        
+rule filter_known_snp:
+    input:
+        fi_vcf=os.path.join(config["output_dir"], "6_vcfs", "{sample}.{strands}.readfiltered.formatted.varfiltered.vcf"),
+        known_snp=config["known_snps"]
+    output:
+        nosnp_vcf=os.path.join(config["output_dir"], "6_vcfs", "{sample}.{strands}.readfiltered.formatted.varfiltered.snpfiltered.vcf")
+    params:
+        run_time="2:00:00",
+        threads="1"
+    singularity:
+        "docker://brianyee/sailor:1.99.0"
+    shell:
+        "{scripts_directory}/filter_known_snp.py --input {input.fi_vcf} --known {input.known_snp} --output {output.nosnp_vcf}"
+        
+rule rank_edits:
+    input:
+        nosnp_vcf=os.path.join(config["output_dir"], "6_vcfs", "{sample}.{strands}.readfiltered.formatted.varfiltered.snpfiltered.vcf")
+    output:
+        conf_vcf=os.path.join(config["output_dir"], "7_scored_outputs", "{sample}.{strands}.readfiltered.formatted.varfiltered.snpfiltered.ranked.conf"),
+        conf_bed=os.path.join(config["output_dir"], "7_scored_outputs", "{sample}.{strands}.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed")
+    params:
+        edit_fraction=config["edit_fraction"],
+        alpha=config["alpha"],
+        beta=config["beta"],
+        keep_all_edited=config["keep_all_edited"],
+        run_time="2:00:00",
+        threads="1",
+        edit_type=config["edit_type"]
+    singularity:
+        "docker://brianyee/sailor:1.99.0"
+    shell:
+        """
+        {scripts_directory}/rank_edits.py --output {output.conf_vcf} -i {input.nosnp_vcf} -c {params.edit_fraction} -a {params.alpha} -b {params.beta} --edit_type {params.edit_type} --keep-100-edited {params.keep_all_edited}
+        """
+        
+rule join_edits:
+    input:
+        fwd=os.path.join(config["output_dir"], "7_scored_outputs", "{sample}.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed"),
+        rev=os.path.join(config["output_dir"], "7_scored_outputs", "{sample}.rev.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed")
+    output:
+        combined=os.path.join(config["output_dir"], "{sample}.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed")
+    params:
+        run_time="2:00:00",
+        threads="1"
+    singularity:
+        "docker://brianyee/sailor:1.99.0"
+    shell:
+        """
+        python -c 'import sys; print(sys.prefix); print(sys.path)' > env_debug.out
+        {scripts_directory}/combine_and_reformat.py --fwd {input.fwd} --rev {input.rev} --output {output.combined}
+        """
+
+rule make_edit_fraction_bedgraph:
+    input:
+        combined=os.path.join(config["output_dir"], "{sample}.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed")
+    output:
+        edit_fraction_bedgraph=os.path.join(config["output_dir"], "9_edit_fraction_bedgraphs", "{sample}.edit_fraction.bedgraph")
+    params:
+        prefix="{sample}",
+        output_dir_path=config["output_dir"],
+        run_time="00:30:00",
+        threads="1"
+    singularity:
+        "docker://brianyee/sailor:1.99.0"  
+    shell:
+        """
+        python {scripts_directory}/edit_fraction_bedgraph.py {input.combined} {params.output_dir_path}/9_edit_fraction_bedgraphs/{params.prefix}.edit_fraction.bedgraph
+        """
+        
+            
+            
+            

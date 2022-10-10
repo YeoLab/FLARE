@@ -1,0 +1,14 @@
+cluster: "qsub -N {rule}.{wildcards} -l nodes=1:ppn={params.threads},walltime={params.run_time} -A yeo-group -q home -V -t 0"
+verbose: true
+notemp: false
+latency: 300
+printshellcmds: true
+directory: .
+snakefile: /projects/ps-yeolab4/software/stamp/0.99.0/bin/stamp/workflow_peakcaller/Snakefile
+use-singularity: true
+singularity-args: '--bind /oasis --bind /projects --bind /home'
+jobs: 8
+skip-script-cleanup: true
+rerun-incomplete: true
+singularity-prefix: /projects/ps-yeolab4/software/stamp/0.99.0/bin/.singularity 
+nolock: true

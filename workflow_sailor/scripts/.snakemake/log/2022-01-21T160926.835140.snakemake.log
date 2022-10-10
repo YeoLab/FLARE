@@ -1,0 +1,1194 @@
+Building DAG of jobs...
+Checking status of 0 jobs.
+Using shell: /bin/bash
+Provided cluster nodes: 160
+Job counts:
+	count	jobs
+	1	all
+	32	make_edit_fraction_bedgraph
+	33
+Resources before job selection: {'_cores': 9223372036854775807, '_nodes': 160}
+Ready jobs (32):
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+Selected jobs (32):
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+	make_edit_fraction_bedgraph
+Resources after job selection: {'_cores': 9223372036854775775, '_nodes': 128}
+
+[Fri Jan 21 16:09:28 2022]
+rule make_edit_fraction_bedgraph:
+    input: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-B5_S9_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed
+    output: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-B5_S9_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph
+    jobid: 36
+    wildcards: sample=Hugo-B5_S9_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam
+
+
+        python /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP//workflow_sailor/scripts/edit_fraction_bedgraph.py /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-B5_S9_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-B5_S9_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed.edit_fraction.bedgraph
+        
+Jobscript:
+#!/bin/sh
+# properties = {"type": "single", "rule": "make_edit_fraction_bedgraph", "local": false, "input": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-B5_S9_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed"], "output": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-B5_S9_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph"], "wildcards": {"sample": "Hugo-B5_S9_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam"}, "params": {"prefix": "Hugo-B5_S9_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed", "stamp_dir_path": "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/", "output_dir_path": "/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs", "run_time": "00:30:00", "threads": "1"}, "log": [], "threads": 1, "resources": {}, "jobid": 36, "cluster": {"jobname": "make_edit_fraction_bedgraph.sample=Hugo-B5_S9_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam", "nodes": 1, "ppn": "1", "walltime": "00:30:00", "array": 0, "account": "yeo-group", "queue": "home"}}
+cd /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts && \
+/projects/ps-yeolab4/software/yeolabconda3/envs/snakemake-5.8.2/bin/python3.9 \
+-m snakemake /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-B5_S9_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph --snakefile /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/Snakefile \
+--force -j --keep-target-files --keep-remote \
+--wait-for-files /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5 /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-B5_S9_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed --latency-wait 50 \
+ --attempt 1 --force-use-threads \
+--wrapper-prefix https://github.com/snakemake/snakemake-wrappers/raw/ \
+ --configfiles /projects/ps-yeolab3/ekofman/Hugo/FullRBPsWithEnzymes/sailor_inputs.json -p --allowed-rules make_edit_fraction_bedgraph --nocolor --notemp --no-hooks --nolock \
+--mode 2  && touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/36.jobfinished" || (touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/36.jobfailed"; exit 1)
+
+Submitted job 36 with external jobid '28013824[].tscc-mgr7.local'.
+
+[Fri Jan 21 16:09:28 2022]
+rule make_edit_fraction_bedgraph:
+    input: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-B6_S10_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed
+    output: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-B6_S10_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph
+    jobid: 49
+    wildcards: sample=Hugo-B6_S10_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam
+
+
+        python /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP//workflow_sailor/scripts/edit_fraction_bedgraph.py /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-B6_S10_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-B6_S10_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed.edit_fraction.bedgraph
+        
+Jobscript:
+#!/bin/sh
+# properties = {"type": "single", "rule": "make_edit_fraction_bedgraph", "local": false, "input": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-B6_S10_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed"], "output": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-B6_S10_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph"], "wildcards": {"sample": "Hugo-B6_S10_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam"}, "params": {"prefix": "Hugo-B6_S10_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed", "stamp_dir_path": "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/", "output_dir_path": "/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs", "run_time": "00:30:00", "threads": "1"}, "log": [], "threads": 1, "resources": {}, "jobid": 49, "cluster": {"jobname": "make_edit_fraction_bedgraph.sample=Hugo-B6_S10_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam", "nodes": 1, "ppn": "1", "walltime": "00:30:00", "array": 0, "account": "yeo-group", "queue": "home"}}
+cd /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts && \
+/projects/ps-yeolab4/software/yeolabconda3/envs/snakemake-5.8.2/bin/python3.9 \
+-m snakemake /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-B6_S10_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph --snakefile /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/Snakefile \
+--force -j --keep-target-files --keep-remote \
+--wait-for-files /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5 /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-B6_S10_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed --latency-wait 50 \
+ --attempt 1 --force-use-threads \
+--wrapper-prefix https://github.com/snakemake/snakemake-wrappers/raw/ \
+ --configfiles /projects/ps-yeolab3/ekofman/Hugo/FullRBPsWithEnzymes/sailor_inputs.json -p --allowed-rules make_edit_fraction_bedgraph --nocolor --notemp --no-hooks --nolock \
+--mode 2  && touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/49.jobfinished" || (touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/49.jobfailed"; exit 1)
+
+Submitted job 49 with external jobid '28013825[].tscc-mgr7.local'.
+
+[Fri Jan 21 16:09:28 2022]
+rule make_edit_fraction_bedgraph:
+    input: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-E5_S81_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed
+    output: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-E5_S81_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph
+    jobid: 64
+    wildcards: sample=Hugo-E5_S81_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam
+
+
+        python /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP//workflow_sailor/scripts/edit_fraction_bedgraph.py /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-E5_S81_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-E5_S81_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed.edit_fraction.bedgraph
+        
+Jobscript:
+#!/bin/sh
+# properties = {"type": "single", "rule": "make_edit_fraction_bedgraph", "local": false, "input": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-E5_S81_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed"], "output": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-E5_S81_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph"], "wildcards": {"sample": "Hugo-E5_S81_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam"}, "params": {"prefix": "Hugo-E5_S81_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed", "stamp_dir_path": "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/", "output_dir_path": "/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs", "run_time": "00:30:00", "threads": "1"}, "log": [], "threads": 1, "resources": {}, "jobid": 64, "cluster": {"jobname": "make_edit_fraction_bedgraph.sample=Hugo-E5_S81_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam", "nodes": 1, "ppn": "1", "walltime": "00:30:00", "array": 0, "account": "yeo-group", "queue": "home"}}
+cd /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts && \
+/projects/ps-yeolab4/software/yeolabconda3/envs/snakemake-5.8.2/bin/python3.9 \
+-m snakemake /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-E5_S81_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph --snakefile /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/Snakefile \
+--force -j --keep-target-files --keep-remote \
+--wait-for-files /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5 /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-E5_S81_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed --latency-wait 50 \
+ --attempt 1 --force-use-threads \
+--wrapper-prefix https://github.com/snakemake/snakemake-wrappers/raw/ \
+ --configfiles /projects/ps-yeolab3/ekofman/Hugo/FullRBPsWithEnzymes/sailor_inputs.json -p --allowed-rules make_edit_fraction_bedgraph --nocolor --notemp --no-hooks --nolock \
+--mode 2  && touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/64.jobfinished" || (touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/64.jobfailed"; exit 1)
+
+Submitted job 64 with external jobid '28013826[].tscc-mgr7.local'.
+
+[Fri Jan 21 16:09:28 2022]
+rule make_edit_fraction_bedgraph:
+    input: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-C7_S16_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed
+    output: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-C7_S16_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph
+    jobid: 41
+    wildcards: sample=Hugo-C7_S16_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam
+
+
+        python /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP//workflow_sailor/scripts/edit_fraction_bedgraph.py /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-C7_S16_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-C7_S16_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed.edit_fraction.bedgraph
+        
+Jobscript:
+#!/bin/sh
+# properties = {"type": "single", "rule": "make_edit_fraction_bedgraph", "local": false, "input": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-C7_S16_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed"], "output": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-C7_S16_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph"], "wildcards": {"sample": "Hugo-C7_S16_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam"}, "params": {"prefix": "Hugo-C7_S16_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed", "stamp_dir_path": "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/", "output_dir_path": "/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs", "run_time": "00:30:00", "threads": "1"}, "log": [], "threads": 1, "resources": {}, "jobid": 41, "cluster": {"jobname": "make_edit_fraction_bedgraph.sample=Hugo-C7_S16_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam", "nodes": 1, "ppn": "1", "walltime": "00:30:00", "array": 0, "account": "yeo-group", "queue": "home"}}
+cd /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts && \
+/projects/ps-yeolab4/software/yeolabconda3/envs/snakemake-5.8.2/bin/python3.9 \
+-m snakemake /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-C7_S16_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph --snakefile /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/Snakefile \
+--force -j --keep-target-files --keep-remote \
+--wait-for-files /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5 /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-C7_S16_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed --latency-wait 50 \
+ --attempt 1 --force-use-threads \
+--wrapper-prefix https://github.com/snakemake/snakemake-wrappers/raw/ \
+ --configfiles /projects/ps-yeolab3/ekofman/Hugo/FullRBPsWithEnzymes/sailor_inputs.json -p --allowed-rules make_edit_fraction_bedgraph --nocolor --notemp --no-hooks --nolock \
+--mode 2  && touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/41.jobfinished" || (touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/41.jobfailed"; exit 1)
+
+Submitted job 41 with external jobid '28013827[].tscc-mgr7.local'.
+
+[Fri Jan 21 16:09:28 2022]
+rule make_edit_fraction_bedgraph:
+    input: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-E6_S82_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed
+    output: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-E6_S82_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph
+    jobid: 57
+    wildcards: sample=Hugo-E6_S82_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam
+
+
+        python /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP//workflow_sailor/scripts/edit_fraction_bedgraph.py /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-E6_S82_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-E6_S82_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed.edit_fraction.bedgraph
+        
+Jobscript:
+#!/bin/sh
+# properties = {"type": "single", "rule": "make_edit_fraction_bedgraph", "local": false, "input": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-E6_S82_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed"], "output": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-E6_S82_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph"], "wildcards": {"sample": "Hugo-E6_S82_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam"}, "params": {"prefix": "Hugo-E6_S82_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed", "stamp_dir_path": "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/", "output_dir_path": "/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs", "run_time": "00:30:00", "threads": "1"}, "log": [], "threads": 1, "resources": {}, "jobid": 57, "cluster": {"jobname": "make_edit_fraction_bedgraph.sample=Hugo-E6_S82_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam", "nodes": 1, "ppn": "1", "walltime": "00:30:00", "array": 0, "account": "yeo-group", "queue": "home"}}
+cd /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts && \
+/projects/ps-yeolab4/software/yeolabconda3/envs/snakemake-5.8.2/bin/python3.9 \
+-m snakemake /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-E6_S82_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph --snakefile /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/Snakefile \
+--force -j --keep-target-files --keep-remote \
+--wait-for-files /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5 /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-E6_S82_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed --latency-wait 50 \
+ --attempt 1 --force-use-threads \
+--wrapper-prefix https://github.com/snakemake/snakemake-wrappers/raw/ \
+ --configfiles /projects/ps-yeolab3/ekofman/Hugo/FullRBPsWithEnzymes/sailor_inputs.json -p --allowed-rules make_edit_fraction_bedgraph --nocolor --notemp --no-hooks --nolock \
+--mode 2  && touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/57.jobfinished" || (touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/57.jobfailed"; exit 1)
+
+Submitted job 57 with external jobid '28013828[].tscc-mgr7.local'.
+
+[Fri Jan 21 16:09:28 2022]
+rule make_edit_fraction_bedgraph:
+    input: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-A4_S3_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed
+    output: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-A4_S3_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph
+    jobid: 61
+    wildcards: sample=Hugo-A4_S3_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam
+
+
+        python /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP//workflow_sailor/scripts/edit_fraction_bedgraph.py /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-A4_S3_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-A4_S3_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed.edit_fraction.bedgraph
+        
+Jobscript:
+#!/bin/sh
+# properties = {"type": "single", "rule": "make_edit_fraction_bedgraph", "local": false, "input": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-A4_S3_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed"], "output": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-A4_S3_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph"], "wildcards": {"sample": "Hugo-A4_S3_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam"}, "params": {"prefix": "Hugo-A4_S3_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed", "stamp_dir_path": "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/", "output_dir_path": "/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs", "run_time": "00:30:00", "threads": "1"}, "log": [], "threads": 1, "resources": {}, "jobid": 61, "cluster": {"jobname": "make_edit_fraction_bedgraph.sample=Hugo-A4_S3_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam", "nodes": 1, "ppn": "1", "walltime": "00:30:00", "array": 0, "account": "yeo-group", "queue": "home"}}
+cd /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts && \
+/projects/ps-yeolab4/software/yeolabconda3/envs/snakemake-5.8.2/bin/python3.9 \
+-m snakemake /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-A4_S3_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph --snakefile /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/Snakefile \
+--force -j --keep-target-files --keep-remote \
+--wait-for-files /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5 /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-A4_S3_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed --latency-wait 50 \
+ --attempt 1 --force-use-threads \
+--wrapper-prefix https://github.com/snakemake/snakemake-wrappers/raw/ \
+ --configfiles /projects/ps-yeolab3/ekofman/Hugo/FullRBPsWithEnzymes/sailor_inputs.json -p --allowed-rules make_edit_fraction_bedgraph --nocolor --notemp --no-hooks --nolock \
+--mode 2  && touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/61.jobfinished" || (touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/61.jobfailed"; exit 1)
+
+Submitted job 61 with external jobid '28013829[].tscc-mgr7.local'.
+
+[Fri Jan 21 16:09:28 2022]
+rule make_edit_fraction_bedgraph:
+    input: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-E8_S83_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed
+    output: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-E8_S83_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph
+    jobid: 58
+    wildcards: sample=Hugo-E8_S83_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam
+
+
+        python /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP//workflow_sailor/scripts/edit_fraction_bedgraph.py /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-E8_S83_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-E8_S83_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed.edit_fraction.bedgraph
+        
+Jobscript:
+#!/bin/sh
+# properties = {"type": "single", "rule": "make_edit_fraction_bedgraph", "local": false, "input": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-E8_S83_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed"], "output": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-E8_S83_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph"], "wildcards": {"sample": "Hugo-E8_S83_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam"}, "params": {"prefix": "Hugo-E8_S83_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed", "stamp_dir_path": "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/", "output_dir_path": "/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs", "run_time": "00:30:00", "threads": "1"}, "log": [], "threads": 1, "resources": {}, "jobid": 58, "cluster": {"jobname": "make_edit_fraction_bedgraph.sample=Hugo-E8_S83_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam", "nodes": 1, "ppn": "1", "walltime": "00:30:00", "array": 0, "account": "yeo-group", "queue": "home"}}
+cd /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts && \
+/projects/ps-yeolab4/software/yeolabconda3/envs/snakemake-5.8.2/bin/python3.9 \
+-m snakemake /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-E8_S83_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph --snakefile /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/Snakefile \
+--force -j --keep-target-files --keep-remote \
+--wait-for-files /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5 /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-E8_S83_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed --latency-wait 50 \
+ --attempt 1 --force-use-threads \
+--wrapper-prefix https://github.com/snakemake/snakemake-wrappers/raw/ \
+ --configfiles /projects/ps-yeolab3/ekofman/Hugo/FullRBPsWithEnzymes/sailor_inputs.json -p --allowed-rules make_edit_fraction_bedgraph --nocolor --notemp --no-hooks --nolock \
+--mode 2  && touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/58.jobfinished" || (touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/58.jobfailed"; exit 1)
+
+Submitted job 58 with external jobid '28013830[].tscc-mgr7.local'.
+
+[Fri Jan 21 16:09:28 2022]
+rule make_edit_fraction_bedgraph:
+    input: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-D5_S76_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed
+    output: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-D5_S76_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph
+    jobid: 35
+    wildcards: sample=Hugo-D5_S76_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam
+
+
+        python /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP//workflow_sailor/scripts/edit_fraction_bedgraph.py /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-D5_S76_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-D5_S76_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed.edit_fraction.bedgraph
+        
+Jobscript:
+#!/bin/sh
+# properties = {"type": "single", "rule": "make_edit_fraction_bedgraph", "local": false, "input": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-D5_S76_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed"], "output": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-D5_S76_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph"], "wildcards": {"sample": "Hugo-D5_S76_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam"}, "params": {"prefix": "Hugo-D5_S76_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed", "stamp_dir_path": "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/", "output_dir_path": "/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs", "run_time": "00:30:00", "threads": "1"}, "log": [], "threads": 1, "resources": {}, "jobid": 35, "cluster": {"jobname": "make_edit_fraction_bedgraph.sample=Hugo-D5_S76_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam", "nodes": 1, "ppn": "1", "walltime": "00:30:00", "array": 0, "account": "yeo-group", "queue": "home"}}
+cd /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts && \
+/projects/ps-yeolab4/software/yeolabconda3/envs/snakemake-5.8.2/bin/python3.9 \
+-m snakemake /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-D5_S76_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph --snakefile /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/Snakefile \
+--force -j --keep-target-files --keep-remote \
+--wait-for-files /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5 /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-D5_S76_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed --latency-wait 50 \
+ --attempt 1 --force-use-threads \
+--wrapper-prefix https://github.com/snakemake/snakemake-wrappers/raw/ \
+ --configfiles /projects/ps-yeolab3/ekofman/Hugo/FullRBPsWithEnzymes/sailor_inputs.json -p --allowed-rules make_edit_fraction_bedgraph --nocolor --notemp --no-hooks --nolock \
+--mode 2  && touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/35.jobfinished" || (touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/35.jobfailed"; exit 1)
+
+Submitted job 35 with external jobid '28013831[].tscc-mgr7.local'.
+
+[Fri Jan 21 16:09:28 2022]
+rule make_edit_fraction_bedgraph:
+    input: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-C1_S12_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed
+    output: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-C1_S12_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph
+    jobid: 39
+    wildcards: sample=Hugo-C1_S12_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam
+
+
+        python /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP//workflow_sailor/scripts/edit_fraction_bedgraph.py /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-C1_S12_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-C1_S12_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed.edit_fraction.bedgraph
+        
+Jobscript:
+#!/bin/sh
+# properties = {"type": "single", "rule": "make_edit_fraction_bedgraph", "local": false, "input": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-C1_S12_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed"], "output": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-C1_S12_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph"], "wildcards": {"sample": "Hugo-C1_S12_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam"}, "params": {"prefix": "Hugo-C1_S12_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed", "stamp_dir_path": "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/", "output_dir_path": "/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs", "run_time": "00:30:00", "threads": "1"}, "log": [], "threads": 1, "resources": {}, "jobid": 39, "cluster": {"jobname": "make_edit_fraction_bedgraph.sample=Hugo-C1_S12_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam", "nodes": 1, "ppn": "1", "walltime": "00:30:00", "array": 0, "account": "yeo-group", "queue": "home"}}
+cd /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts && \
+/projects/ps-yeolab4/software/yeolabconda3/envs/snakemake-5.8.2/bin/python3.9 \
+-m snakemake /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-C1_S12_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph --snakefile /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/Snakefile \
+--force -j --keep-target-files --keep-remote \
+--wait-for-files /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5 /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-C1_S12_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed --latency-wait 50 \
+ --attempt 1 --force-use-threads \
+--wrapper-prefix https://github.com/snakemake/snakemake-wrappers/raw/ \
+ --configfiles /projects/ps-yeolab3/ekofman/Hugo/FullRBPsWithEnzymes/sailor_inputs.json -p --allowed-rules make_edit_fraction_bedgraph --nocolor --notemp --no-hooks --nolock \
+--mode 2  && touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/39.jobfinished" || (touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/39.jobfailed"; exit 1)
+
+Submitted job 39 with external jobid '28013832[].tscc-mgr7.local'.
+
+[Fri Jan 21 16:09:28 2022]
+rule make_edit_fraction_bedgraph:
+    input: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-A7_S5_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed
+    output: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-A7_S5_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph
+    jobid: 46
+    wildcards: sample=Hugo-A7_S5_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam
+
+
+        python /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP//workflow_sailor/scripts/edit_fraction_bedgraph.py /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-A7_S5_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-A7_S5_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed.edit_fraction.bedgraph
+        
+Jobscript:
+#!/bin/sh
+# properties = {"type": "single", "rule": "make_edit_fraction_bedgraph", "local": false, "input": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-A7_S5_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed"], "output": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-A7_S5_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph"], "wildcards": {"sample": "Hugo-A7_S5_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam"}, "params": {"prefix": "Hugo-A7_S5_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed", "stamp_dir_path": "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/", "output_dir_path": "/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs", "run_time": "00:30:00", "threads": "1"}, "log": [], "threads": 1, "resources": {}, "jobid": 46, "cluster": {"jobname": "make_edit_fraction_bedgraph.sample=Hugo-A7_S5_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam", "nodes": 1, "ppn": "1", "walltime": "00:30:00", "array": 0, "account": "yeo-group", "queue": "home"}}
+cd /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts && \
+/projects/ps-yeolab4/software/yeolabconda3/envs/snakemake-5.8.2/bin/python3.9 \
+-m snakemake /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-A7_S5_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph --snakefile /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/Snakefile \
+--force -j --keep-target-files --keep-remote \
+--wait-for-files /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5 /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-A7_S5_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed --latency-wait 50 \
+ --attempt 1 --force-use-threads \
+--wrapper-prefix https://github.com/snakemake/snakemake-wrappers/raw/ \
+ --configfiles /projects/ps-yeolab3/ekofman/Hugo/FullRBPsWithEnzymes/sailor_inputs.json -p --allowed-rules make_edit_fraction_bedgraph --nocolor --notemp --no-hooks --nolock \
+--mode 2  && touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/46.jobfinished" || (touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/46.jobfailed"; exit 1)
+
+Submitted job 46 with external jobid '28013833[].tscc-mgr7.local'.
+
+[Fri Jan 21 16:09:29 2022]
+rule make_edit_fraction_bedgraph:
+    input: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-C3_S13_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed
+    output: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-C3_S13_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph
+    jobid: 60
+    wildcards: sample=Hugo-C3_S13_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam
+
+
+        python /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP//workflow_sailor/scripts/edit_fraction_bedgraph.py /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-C3_S13_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-C3_S13_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed.edit_fraction.bedgraph
+        
+Jobscript:
+#!/bin/sh
+# properties = {"type": "single", "rule": "make_edit_fraction_bedgraph", "local": false, "input": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-C3_S13_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed"], "output": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-C3_S13_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph"], "wildcards": {"sample": "Hugo-C3_S13_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam"}, "params": {"prefix": "Hugo-C3_S13_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed", "stamp_dir_path": "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/", "output_dir_path": "/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs", "run_time": "00:30:00", "threads": "1"}, "log": [], "threads": 1, "resources": {}, "jobid": 60, "cluster": {"jobname": "make_edit_fraction_bedgraph.sample=Hugo-C3_S13_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam", "nodes": 1, "ppn": "1", "walltime": "00:30:00", "array": 0, "account": "yeo-group", "queue": "home"}}
+cd /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts && \
+/projects/ps-yeolab4/software/yeolabconda3/envs/snakemake-5.8.2/bin/python3.9 \
+-m snakemake /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-C3_S13_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph --snakefile /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/Snakefile \
+--force -j --keep-target-files --keep-remote \
+--wait-for-files /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5 /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-C3_S13_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed --latency-wait 50 \
+ --attempt 1 --force-use-threads \
+--wrapper-prefix https://github.com/snakemake/snakemake-wrappers/raw/ \
+ --configfiles /projects/ps-yeolab3/ekofman/Hugo/FullRBPsWithEnzymes/sailor_inputs.json -p --allowed-rules make_edit_fraction_bedgraph --nocolor --notemp --no-hooks --nolock \
+--mode 2  && touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/60.jobfinished" || (touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/60.jobfailed"; exit 1)
+
+Submitted job 60 with external jobid '28013834[].tscc-mgr7.local'.
+
+[Fri Jan 21 16:09:29 2022]
+rule make_edit_fraction_bedgraph:
+    input: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-A8_S6_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed
+    output: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-A8_S6_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph
+    jobid: 63
+    wildcards: sample=Hugo-A8_S6_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam
+
+
+        python /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP//workflow_sailor/scripts/edit_fraction_bedgraph.py /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-A8_S6_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-A8_S6_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed.edit_fraction.bedgraph
+        
+Jobscript:
+#!/bin/sh
+# properties = {"type": "single", "rule": "make_edit_fraction_bedgraph", "local": false, "input": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-A8_S6_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed"], "output": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-A8_S6_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph"], "wildcards": {"sample": "Hugo-A8_S6_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam"}, "params": {"prefix": "Hugo-A8_S6_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed", "stamp_dir_path": "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/", "output_dir_path": "/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs", "run_time": "00:30:00", "threads": "1"}, "log": [], "threads": 1, "resources": {}, "jobid": 63, "cluster": {"jobname": "make_edit_fraction_bedgraph.sample=Hugo-A8_S6_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam", "nodes": 1, "ppn": "1", "walltime": "00:30:00", "array": 0, "account": "yeo-group", "queue": "home"}}
+cd /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts && \
+/projects/ps-yeolab4/software/yeolabconda3/envs/snakemake-5.8.2/bin/python3.9 \
+-m snakemake /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-A8_S6_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph --snakefile /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/Snakefile \
+--force -j --keep-target-files --keep-remote \
+--wait-for-files /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5 /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-A8_S6_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed --latency-wait 50 \
+ --attempt 1 --force-use-threads \
+--wrapper-prefix https://github.com/snakemake/snakemake-wrappers/raw/ \
+ --configfiles /projects/ps-yeolab3/ekofman/Hugo/FullRBPsWithEnzymes/sailor_inputs.json -p --allowed-rules make_edit_fraction_bedgraph --nocolor --notemp --no-hooks --nolock \
+--mode 2  && touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/63.jobfinished" || (touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/63.jobfailed"; exit 1)
+
+Submitted job 63 with external jobid '28013835[].tscc-mgr7.local'.
+
+[Fri Jan 21 16:09:29 2022]
+rule make_edit_fraction_bedgraph:
+    input: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-B8_S11_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed
+    output: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-B8_S11_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph
+    jobid: 43
+    wildcards: sample=Hugo-B8_S11_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam
+
+
+        python /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP//workflow_sailor/scripts/edit_fraction_bedgraph.py /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-B8_S11_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-B8_S11_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed.edit_fraction.bedgraph
+        
+Jobscript:
+#!/bin/sh
+# properties = {"type": "single", "rule": "make_edit_fraction_bedgraph", "local": false, "input": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-B8_S11_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed"], "output": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-B8_S11_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph"], "wildcards": {"sample": "Hugo-B8_S11_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam"}, "params": {"prefix": "Hugo-B8_S11_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed", "stamp_dir_path": "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/", "output_dir_path": "/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs", "run_time": "00:30:00", "threads": "1"}, "log": [], "threads": 1, "resources": {}, "jobid": 43, "cluster": {"jobname": "make_edit_fraction_bedgraph.sample=Hugo-B8_S11_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam", "nodes": 1, "ppn": "1", "walltime": "00:30:00", "array": 0, "account": "yeo-group", "queue": "home"}}
+cd /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts && \
+/projects/ps-yeolab4/software/yeolabconda3/envs/snakemake-5.8.2/bin/python3.9 \
+-m snakemake /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-B8_S11_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph --snakefile /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/Snakefile \
+--force -j --keep-target-files --keep-remote \
+--wait-for-files /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5 /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-B8_S11_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed --latency-wait 50 \
+ --attempt 1 --force-use-threads \
+--wrapper-prefix https://github.com/snakemake/snakemake-wrappers/raw/ \
+ --configfiles /projects/ps-yeolab3/ekofman/Hugo/FullRBPsWithEnzymes/sailor_inputs.json -p --allowed-rules make_edit_fraction_bedgraph --nocolor --notemp --no-hooks --nolock \
+--mode 2  && touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/43.jobfinished" || (touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/43.jobfailed"; exit 1)
+
+Submitted job 43 with external jobid '28013836[].tscc-mgr7.local'.
+
+[Fri Jan 21 16:09:29 2022]
+rule make_edit_fraction_bedgraph:
+    input: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-E2_S79_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed
+    output: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-E2_S79_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph
+    jobid: 34
+    wildcards: sample=Hugo-E2_S79_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam
+
+
+        python /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP//workflow_sailor/scripts/edit_fraction_bedgraph.py /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-E2_S79_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-E2_S79_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed.edit_fraction.bedgraph
+        
+Jobscript:
+#!/bin/sh
+# properties = {"type": "single", "rule": "make_edit_fraction_bedgraph", "local": false, "input": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-E2_S79_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed"], "output": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-E2_S79_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph"], "wildcards": {"sample": "Hugo-E2_S79_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam"}, "params": {"prefix": "Hugo-E2_S79_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed", "stamp_dir_path": "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/", "output_dir_path": "/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs", "run_time": "00:30:00", "threads": "1"}, "log": [], "threads": 1, "resources": {}, "jobid": 34, "cluster": {"jobname": "make_edit_fraction_bedgraph.sample=Hugo-E2_S79_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam", "nodes": 1, "ppn": "1", "walltime": "00:30:00", "array": 0, "account": "yeo-group", "queue": "home"}}
+cd /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts && \
+/projects/ps-yeolab4/software/yeolabconda3/envs/snakemake-5.8.2/bin/python3.9 \
+-m snakemake /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-E2_S79_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph --snakefile /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/Snakefile \
+--force -j --keep-target-files --keep-remote \
+--wait-for-files /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5 /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-E2_S79_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed --latency-wait 50 \
+ --attempt 1 --force-use-threads \
+--wrapper-prefix https://github.com/snakemake/snakemake-wrappers/raw/ \
+ --configfiles /projects/ps-yeolab3/ekofman/Hugo/FullRBPsWithEnzymes/sailor_inputs.json -p --allowed-rules make_edit_fraction_bedgraph --nocolor --notemp --no-hooks --nolock \
+--mode 2  && touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/34.jobfinished" || (touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/34.jobfailed"; exit 1)
+
+Submitted job 34 with external jobid '28013837[].tscc-mgr7.local'.
+
+[Fri Jan 21 16:09:29 2022]
+rule make_edit_fraction_bedgraph:
+    input: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-D4_S75_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed
+    output: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-D4_S75_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph
+    jobid: 55
+    wildcards: sample=Hugo-D4_S75_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam
+
+
+        python /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP//workflow_sailor/scripts/edit_fraction_bedgraph.py /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-D4_S75_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-D4_S75_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed.edit_fraction.bedgraph
+        
+Jobscript:
+#!/bin/sh
+# properties = {"type": "single", "rule": "make_edit_fraction_bedgraph", "local": false, "input": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-D4_S75_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed"], "output": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-D4_S75_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph"], "wildcards": {"sample": "Hugo-D4_S75_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam"}, "params": {"prefix": "Hugo-D4_S75_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed", "stamp_dir_path": "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/", "output_dir_path": "/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs", "run_time": "00:30:00", "threads": "1"}, "log": [], "threads": 1, "resources": {}, "jobid": 55, "cluster": {"jobname": "make_edit_fraction_bedgraph.sample=Hugo-D4_S75_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam", "nodes": 1, "ppn": "1", "walltime": "00:30:00", "array": 0, "account": "yeo-group", "queue": "home"}}
+cd /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts && \
+/projects/ps-yeolab4/software/yeolabconda3/envs/snakemake-5.8.2/bin/python3.9 \
+-m snakemake /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-D4_S75_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph --snakefile /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/Snakefile \
+--force -j --keep-target-files --keep-remote \
+--wait-for-files /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5 /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-D4_S75_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed --latency-wait 50 \
+ --attempt 1 --force-use-threads \
+--wrapper-prefix https://github.com/snakemake/snakemake-wrappers/raw/ \
+ --configfiles /projects/ps-yeolab3/ekofman/Hugo/FullRBPsWithEnzymes/sailor_inputs.json -p --allowed-rules make_edit_fraction_bedgraph --nocolor --notemp --no-hooks --nolock \
+--mode 2  && touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/55.jobfinished" || (touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/55.jobfailed"; exit 1)
+
+Submitted job 55 with external jobid '28013838[].tscc-mgr7.local'.
+
+[Fri Jan 21 16:09:29 2022]
+rule make_edit_fraction_bedgraph:
+    input: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-D7_S77_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed
+    output: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-D7_S77_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph
+    jobid: 54
+    wildcards: sample=Hugo-D7_S77_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam
+
+
+        python /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP//workflow_sailor/scripts/edit_fraction_bedgraph.py /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-D7_S77_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-D7_S77_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed.edit_fraction.bedgraph
+        
+Jobscript:
+#!/bin/sh
+# properties = {"type": "single", "rule": "make_edit_fraction_bedgraph", "local": false, "input": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-D7_S77_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed"], "output": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-D7_S77_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph"], "wildcards": {"sample": "Hugo-D7_S77_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam"}, "params": {"prefix": "Hugo-D7_S77_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed", "stamp_dir_path": "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/", "output_dir_path": "/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs", "run_time": "00:30:00", "threads": "1"}, "log": [], "threads": 1, "resources": {}, "jobid": 54, "cluster": {"jobname": "make_edit_fraction_bedgraph.sample=Hugo-D7_S77_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam", "nodes": 1, "ppn": "1", "walltime": "00:30:00", "array": 0, "account": "yeo-group", "queue": "home"}}
+cd /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts && \
+/projects/ps-yeolab4/software/yeolabconda3/envs/snakemake-5.8.2/bin/python3.9 \
+-m snakemake /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-D7_S77_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph --snakefile /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/Snakefile \
+--force -j --keep-target-files --keep-remote \
+--wait-for-files /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5 /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-D7_S77_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed --latency-wait 50 \
+ --attempt 1 --force-use-threads \
+--wrapper-prefix https://github.com/snakemake/snakemake-wrappers/raw/ \
+ --configfiles /projects/ps-yeolab3/ekofman/Hugo/FullRBPsWithEnzymes/sailor_inputs.json -p --allowed-rules make_edit_fraction_bedgraph --nocolor --notemp --no-hooks --nolock \
+--mode 2  && touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/54.jobfinished" || (touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/54.jobfailed"; exit 1)
+
+Submitted job 54 with external jobid '28013839[].tscc-mgr7.local'.
+
+[Fri Jan 21 16:09:29 2022]
+rule make_edit_fraction_bedgraph:
+    input: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-D1_S73_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed
+    output: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-D1_S73_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph
+    jobid: 56
+    wildcards: sample=Hugo-D1_S73_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam
+
+
+        python /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP//workflow_sailor/scripts/edit_fraction_bedgraph.py /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-D1_S73_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-D1_S73_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed.edit_fraction.bedgraph
+        
+Jobscript:
+#!/bin/sh
+# properties = {"type": "single", "rule": "make_edit_fraction_bedgraph", "local": false, "input": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-D1_S73_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed"], "output": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-D1_S73_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph"], "wildcards": {"sample": "Hugo-D1_S73_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam"}, "params": {"prefix": "Hugo-D1_S73_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed", "stamp_dir_path": "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/", "output_dir_path": "/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs", "run_time": "00:30:00", "threads": "1"}, "log": [], "threads": 1, "resources": {}, "jobid": 56, "cluster": {"jobname": "make_edit_fraction_bedgraph.sample=Hugo-D1_S73_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam", "nodes": 1, "ppn": "1", "walltime": "00:30:00", "array": 0, "account": "yeo-group", "queue": "home"}}
+cd /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts && \
+/projects/ps-yeolab4/software/yeolabconda3/envs/snakemake-5.8.2/bin/python3.9 \
+-m snakemake /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-D1_S73_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph --snakefile /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/Snakefile \
+--force -j --keep-target-files --keep-remote \
+--wait-for-files /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5 /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-D1_S73_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed --latency-wait 50 \
+ --attempt 1 --force-use-threads \
+--wrapper-prefix https://github.com/snakemake/snakemake-wrappers/raw/ \
+ --configfiles /projects/ps-yeolab3/ekofman/Hugo/FullRBPsWithEnzymes/sailor_inputs.json -p --allowed-rules make_edit_fraction_bedgraph --nocolor --notemp --no-hooks --nolock \
+--mode 2  && touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/56.jobfinished" || (touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/56.jobfailed"; exit 1)
+
+Submitted job 56 with external jobid '28013840[].tscc-mgr7.local'.
+
+[Fri Jan 21 16:09:29 2022]
+rule make_edit_fraction_bedgraph:
+    input: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-F6_S87_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed
+    output: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-F6_S87_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph
+    jobid: 45
+    wildcards: sample=Hugo-F6_S87_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam
+
+
+        python /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP//workflow_sailor/scripts/edit_fraction_bedgraph.py /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-F6_S87_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-F6_S87_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed.edit_fraction.bedgraph
+        
+Jobscript:
+#!/bin/sh
+# properties = {"type": "single", "rule": "make_edit_fraction_bedgraph", "local": false, "input": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-F6_S87_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed"], "output": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-F6_S87_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph"], "wildcards": {"sample": "Hugo-F6_S87_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam"}, "params": {"prefix": "Hugo-F6_S87_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed", "stamp_dir_path": "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/", "output_dir_path": "/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs", "run_time": "00:30:00", "threads": "1"}, "log": [], "threads": 1, "resources": {}, "jobid": 45, "cluster": {"jobname": "make_edit_fraction_bedgraph.sample=Hugo-F6_S87_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam", "nodes": 1, "ppn": "1", "walltime": "00:30:00", "array": 0, "account": "yeo-group", "queue": "home"}}
+cd /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts && \
+/projects/ps-yeolab4/software/yeolabconda3/envs/snakemake-5.8.2/bin/python3.9 \
+-m snakemake /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-F6_S87_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph --snakefile /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/Snakefile \
+--force -j --keep-target-files --keep-remote \
+--wait-for-files /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5 /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-F6_S87_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed --latency-wait 50 \
+ --attempt 1 --force-use-threads \
+--wrapper-prefix https://github.com/snakemake/snakemake-wrappers/raw/ \
+ --configfiles /projects/ps-yeolab3/ekofman/Hugo/FullRBPsWithEnzymes/sailor_inputs.json -p --allowed-rules make_edit_fraction_bedgraph --nocolor --notemp --no-hooks --nolock \
+--mode 2  && touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/45.jobfinished" || (touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/45.jobfailed"; exit 1)
+
+Submitted job 45 with external jobid '28013841[].tscc-mgr7.local'.
+
+[Fri Jan 21 16:09:30 2022]
+rule make_edit_fraction_bedgraph:
+    input: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-C4_S14_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed
+    output: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-C4_S14_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph
+    jobid: 40
+    wildcards: sample=Hugo-C4_S14_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam
+
+
+        python /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP//workflow_sailor/scripts/edit_fraction_bedgraph.py /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-C4_S14_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-C4_S14_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed.edit_fraction.bedgraph
+        
+Jobscript:
+#!/bin/sh
+# properties = {"type": "single", "rule": "make_edit_fraction_bedgraph", "local": false, "input": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-C4_S14_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed"], "output": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-C4_S14_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph"], "wildcards": {"sample": "Hugo-C4_S14_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam"}, "params": {"prefix": "Hugo-C4_S14_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed", "stamp_dir_path": "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/", "output_dir_path": "/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs", "run_time": "00:30:00", "threads": "1"}, "log": [], "threads": 1, "resources": {}, "jobid": 40, "cluster": {"jobname": "make_edit_fraction_bedgraph.sample=Hugo-C4_S14_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam", "nodes": 1, "ppn": "1", "walltime": "00:30:00", "array": 0, "account": "yeo-group", "queue": "home"}}
+cd /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts && \
+/projects/ps-yeolab4/software/yeolabconda3/envs/snakemake-5.8.2/bin/python3.9 \
+-m snakemake /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-C4_S14_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph --snakefile /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/Snakefile \
+--force -j --keep-target-files --keep-remote \
+--wait-for-files /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5 /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-C4_S14_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed --latency-wait 50 \
+ --attempt 1 --force-use-threads \
+--wrapper-prefix https://github.com/snakemake/snakemake-wrappers/raw/ \
+ --configfiles /projects/ps-yeolab3/ekofman/Hugo/FullRBPsWithEnzymes/sailor_inputs.json -p --allowed-rules make_edit_fraction_bedgraph --nocolor --notemp --no-hooks --nolock \
+--mode 2  && touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/40.jobfinished" || (touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/40.jobfailed"; exit 1)
+
+Submitted job 40 with external jobid '28013842[].tscc-mgr7.local'.
+
+[Fri Jan 21 16:09:30 2022]
+rule make_edit_fraction_bedgraph:
+    input: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-A2_S2_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed
+    output: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-A2_S2_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph
+    jobid: 42
+    wildcards: sample=Hugo-A2_S2_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam
+
+
+        python /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP//workflow_sailor/scripts/edit_fraction_bedgraph.py /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-A2_S2_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-A2_S2_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed.edit_fraction.bedgraph
+        
+Jobscript:
+#!/bin/sh
+# properties = {"type": "single", "rule": "make_edit_fraction_bedgraph", "local": false, "input": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-A2_S2_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed"], "output": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-A2_S2_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph"], "wildcards": {"sample": "Hugo-A2_S2_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam"}, "params": {"prefix": "Hugo-A2_S2_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed", "stamp_dir_path": "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/", "output_dir_path": "/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs", "run_time": "00:30:00", "threads": "1"}, "log": [], "threads": 1, "resources": {}, "jobid": 42, "cluster": {"jobname": "make_edit_fraction_bedgraph.sample=Hugo-A2_S2_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam", "nodes": 1, "ppn": "1", "walltime": "00:30:00", "array": 0, "account": "yeo-group", "queue": "home"}}
+cd /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts && \
+/projects/ps-yeolab4/software/yeolabconda3/envs/snakemake-5.8.2/bin/python3.9 \
+-m snakemake /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-A2_S2_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph --snakefile /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/Snakefile \
+--force -j --keep-target-files --keep-remote \
+--wait-for-files /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5 /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-A2_S2_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed --latency-wait 50 \
+ --attempt 1 --force-use-threads \
+--wrapper-prefix https://github.com/snakemake/snakemake-wrappers/raw/ \
+ --configfiles /projects/ps-yeolab3/ekofman/Hugo/FullRBPsWithEnzymes/sailor_inputs.json -p --allowed-rules make_edit_fraction_bedgraph --nocolor --notemp --no-hooks --nolock \
+--mode 2  && touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/42.jobfinished" || (touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/42.jobfailed"; exit 1)
+
+Submitted job 42 with external jobid '28013843[].tscc-mgr7.local'.
+
+[Fri Jan 21 16:09:30 2022]
+rule make_edit_fraction_bedgraph:
+    input: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-D2_S74_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed
+    output: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-D2_S74_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph
+    jobid: 44
+    wildcards: sample=Hugo-D2_S74_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam
+
+
+        python /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP//workflow_sailor/scripts/edit_fraction_bedgraph.py /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-D2_S74_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-D2_S74_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed.edit_fraction.bedgraph
+        
+Jobscript:
+#!/bin/sh
+# properties = {"type": "single", "rule": "make_edit_fraction_bedgraph", "local": false, "input": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-D2_S74_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed"], "output": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-D2_S74_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph"], "wildcards": {"sample": "Hugo-D2_S74_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam"}, "params": {"prefix": "Hugo-D2_S74_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed", "stamp_dir_path": "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/", "output_dir_path": "/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs", "run_time": "00:30:00", "threads": "1"}, "log": [], "threads": 1, "resources": {}, "jobid": 44, "cluster": {"jobname": "make_edit_fraction_bedgraph.sample=Hugo-D2_S74_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam", "nodes": 1, "ppn": "1", "walltime": "00:30:00", "array": 0, "account": "yeo-group", "queue": "home"}}
+cd /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts && \
+/projects/ps-yeolab4/software/yeolabconda3/envs/snakemake-5.8.2/bin/python3.9 \
+-m snakemake /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-D2_S74_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph --snakefile /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/Snakefile \
+--force -j --keep-target-files --keep-remote \
+--wait-for-files /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5 /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-D2_S74_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed --latency-wait 50 \
+ --attempt 1 --force-use-threads \
+--wrapper-prefix https://github.com/snakemake/snakemake-wrappers/raw/ \
+ --configfiles /projects/ps-yeolab3/ekofman/Hugo/FullRBPsWithEnzymes/sailor_inputs.json -p --allowed-rules make_edit_fraction_bedgraph --nocolor --notemp --no-hooks --nolock \
+--mode 2  && touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/44.jobfinished" || (touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/44.jobfailed"; exit 1)
+
+Submitted job 44 with external jobid '28013844[].tscc-mgr7.local'.
+
+[Fri Jan 21 16:09:30 2022]
+rule make_edit_fraction_bedgraph:
+    input: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-F4_S86_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed
+    output: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-F4_S86_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph
+    jobid: 52
+    wildcards: sample=Hugo-F4_S86_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam
+
+
+        python /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP//workflow_sailor/scripts/edit_fraction_bedgraph.py /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-F4_S86_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-F4_S86_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed.edit_fraction.bedgraph
+        
+Jobscript:
+#!/bin/sh
+# properties = {"type": "single", "rule": "make_edit_fraction_bedgraph", "local": false, "input": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-F4_S86_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed"], "output": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-F4_S86_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph"], "wildcards": {"sample": "Hugo-F4_S86_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam"}, "params": {"prefix": "Hugo-F4_S86_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed", "stamp_dir_path": "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/", "output_dir_path": "/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs", "run_time": "00:30:00", "threads": "1"}, "log": [], "threads": 1, "resources": {}, "jobid": 52, "cluster": {"jobname": "make_edit_fraction_bedgraph.sample=Hugo-F4_S86_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam", "nodes": 1, "ppn": "1", "walltime": "00:30:00", "array": 0, "account": "yeo-group", "queue": "home"}}
+cd /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts && \
+/projects/ps-yeolab4/software/yeolabconda3/envs/snakemake-5.8.2/bin/python3.9 \
+-m snakemake /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-F4_S86_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph --snakefile /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/Snakefile \
+--force -j --keep-target-files --keep-remote \
+--wait-for-files /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5 /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-F4_S86_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed --latency-wait 50 \
+ --attempt 1 --force-use-threads \
+--wrapper-prefix https://github.com/snakemake/snakemake-wrappers/raw/ \
+ --configfiles /projects/ps-yeolab3/ekofman/Hugo/FullRBPsWithEnzymes/sailor_inputs.json -p --allowed-rules make_edit_fraction_bedgraph --nocolor --notemp --no-hooks --nolock \
+--mode 2  && touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/52.jobfinished" || (touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/52.jobfailed"; exit 1)
+
+Submitted job 52 with external jobid '28013845[].tscc-mgr7.local'.
+
+[Fri Jan 21 16:09:30 2022]
+rule make_edit_fraction_bedgraph:
+    input: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-F7_S88_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed
+    output: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-F7_S88_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph
+    jobid: 59
+    wildcards: sample=Hugo-F7_S88_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam
+
+
+        python /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP//workflow_sailor/scripts/edit_fraction_bedgraph.py /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-F7_S88_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-F7_S88_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed.edit_fraction.bedgraph
+        
+Jobscript:
+#!/bin/sh
+# properties = {"type": "single", "rule": "make_edit_fraction_bedgraph", "local": false, "input": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-F7_S88_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed"], "output": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-F7_S88_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph"], "wildcards": {"sample": "Hugo-F7_S88_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam"}, "params": {"prefix": "Hugo-F7_S88_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed", "stamp_dir_path": "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/", "output_dir_path": "/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs", "run_time": "00:30:00", "threads": "1"}, "log": [], "threads": 1, "resources": {}, "jobid": 59, "cluster": {"jobname": "make_edit_fraction_bedgraph.sample=Hugo-F7_S88_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam", "nodes": 1, "ppn": "1", "walltime": "00:30:00", "array": 0, "account": "yeo-group", "queue": "home"}}
+cd /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts && \
+/projects/ps-yeolab4/software/yeolabconda3/envs/snakemake-5.8.2/bin/python3.9 \
+-m snakemake /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-F7_S88_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph --snakefile /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/Snakefile \
+--force -j --keep-target-files --keep-remote \
+--wait-for-files /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5 /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-F7_S88_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed --latency-wait 50 \
+ --attempt 1 --force-use-threads \
+--wrapper-prefix https://github.com/snakemake/snakemake-wrappers/raw/ \
+ --configfiles /projects/ps-yeolab3/ekofman/Hugo/FullRBPsWithEnzymes/sailor_inputs.json -p --allowed-rules make_edit_fraction_bedgraph --nocolor --notemp --no-hooks --nolock \
+--mode 2  && touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/59.jobfinished" || (touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/59.jobfailed"; exit 1)
+
+Submitted job 59 with external jobid '28013846[].tscc-mgr7.local'.
+
+[Fri Jan 21 16:09:30 2022]
+rule make_edit_fraction_bedgraph:
+    input: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-A1_S1_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed
+    output: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-A1_S1_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph
+    jobid: 50
+    wildcards: sample=Hugo-A1_S1_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam
+
+
+        python /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP//workflow_sailor/scripts/edit_fraction_bedgraph.py /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-A1_S1_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-A1_S1_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed.edit_fraction.bedgraph
+        
+Jobscript:
+#!/bin/sh
+# properties = {"type": "single", "rule": "make_edit_fraction_bedgraph", "local": false, "input": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-A1_S1_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed"], "output": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-A1_S1_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph"], "wildcards": {"sample": "Hugo-A1_S1_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam"}, "params": {"prefix": "Hugo-A1_S1_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed", "stamp_dir_path": "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/", "output_dir_path": "/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs", "run_time": "00:30:00", "threads": "1"}, "log": [], "threads": 1, "resources": {}, "jobid": 50, "cluster": {"jobname": "make_edit_fraction_bedgraph.sample=Hugo-A1_S1_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam", "nodes": 1, "ppn": "1", "walltime": "00:30:00", "array": 0, "account": "yeo-group", "queue": "home"}}
+cd /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts && \
+/projects/ps-yeolab4/software/yeolabconda3/envs/snakemake-5.8.2/bin/python3.9 \
+-m snakemake /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-A1_S1_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph --snakefile /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/Snakefile \
+--force -j --keep-target-files --keep-remote \
+--wait-for-files /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5 /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-A1_S1_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed --latency-wait 50 \
+ --attempt 1 --force-use-threads \
+--wrapper-prefix https://github.com/snakemake/snakemake-wrappers/raw/ \
+ --configfiles /projects/ps-yeolab3/ekofman/Hugo/FullRBPsWithEnzymes/sailor_inputs.json -p --allowed-rules make_edit_fraction_bedgraph --nocolor --notemp --no-hooks --nolock \
+--mode 2  && touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/50.jobfinished" || (touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/50.jobfailed"; exit 1)
+
+Submitted job 50 with external jobid '28013847[].tscc-mgr7.local'.
+
+[Fri Jan 21 16:09:30 2022]
+rule make_edit_fraction_bedgraph:
+    input: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-B2_S7_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed
+    output: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-B2_S7_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph
+    jobid: 51
+    wildcards: sample=Hugo-B2_S7_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam
+
+
+        python /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP//workflow_sailor/scripts/edit_fraction_bedgraph.py /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-B2_S7_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-B2_S7_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed.edit_fraction.bedgraph
+        
+Jobscript:
+#!/bin/sh
+# properties = {"type": "single", "rule": "make_edit_fraction_bedgraph", "local": false, "input": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-B2_S7_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed"], "output": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-B2_S7_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph"], "wildcards": {"sample": "Hugo-B2_S7_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam"}, "params": {"prefix": "Hugo-B2_S7_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed", "stamp_dir_path": "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/", "output_dir_path": "/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs", "run_time": "00:30:00", "threads": "1"}, "log": [], "threads": 1, "resources": {}, "jobid": 51, "cluster": {"jobname": "make_edit_fraction_bedgraph.sample=Hugo-B2_S7_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam", "nodes": 1, "ppn": "1", "walltime": "00:30:00", "array": 0, "account": "yeo-group", "queue": "home"}}
+cd /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts && \
+/projects/ps-yeolab4/software/yeolabconda3/envs/snakemake-5.8.2/bin/python3.9 \
+-m snakemake /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-B2_S7_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph --snakefile /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/Snakefile \
+--force -j --keep-target-files --keep-remote \
+--wait-for-files /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5 /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-B2_S7_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed --latency-wait 50 \
+ --attempt 1 --force-use-threads \
+--wrapper-prefix https://github.com/snakemake/snakemake-wrappers/raw/ \
+ --configfiles /projects/ps-yeolab3/ekofman/Hugo/FullRBPsWithEnzymes/sailor_inputs.json -p --allowed-rules make_edit_fraction_bedgraph --nocolor --notemp --no-hooks --nolock \
+--mode 2  && touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/51.jobfinished" || (touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/51.jobfailed"; exit 1)
+
+Submitted job 51 with external jobid '28013848[].tscc-mgr7.local'.
+
+[Fri Jan 21 16:09:30 2022]
+rule make_edit_fraction_bedgraph:
+    input: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-D8_S78_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed
+    output: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-D8_S78_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph
+    jobid: 47
+    wildcards: sample=Hugo-D8_S78_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam
+
+
+        python /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP//workflow_sailor/scripts/edit_fraction_bedgraph.py /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-D8_S78_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-D8_S78_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed.edit_fraction.bedgraph
+        
+Jobscript:
+#!/bin/sh
+# properties = {"type": "single", "rule": "make_edit_fraction_bedgraph", "local": false, "input": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-D8_S78_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed"], "output": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-D8_S78_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph"], "wildcards": {"sample": "Hugo-D8_S78_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam"}, "params": {"prefix": "Hugo-D8_S78_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed", "stamp_dir_path": "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/", "output_dir_path": "/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs", "run_time": "00:30:00", "threads": "1"}, "log": [], "threads": 1, "resources": {}, "jobid": 47, "cluster": {"jobname": "make_edit_fraction_bedgraph.sample=Hugo-D8_S78_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam", "nodes": 1, "ppn": "1", "walltime": "00:30:00", "array": 0, "account": "yeo-group", "queue": "home"}}
+cd /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts && \
+/projects/ps-yeolab4/software/yeolabconda3/envs/snakemake-5.8.2/bin/python3.9 \
+-m snakemake /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-D8_S78_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph --snakefile /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/Snakefile \
+--force -j --keep-target-files --keep-remote \
+--wait-for-files /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5 /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-D8_S78_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed --latency-wait 50 \
+ --attempt 1 --force-use-threads \
+--wrapper-prefix https://github.com/snakemake/snakemake-wrappers/raw/ \
+ --configfiles /projects/ps-yeolab3/ekofman/Hugo/FullRBPsWithEnzymes/sailor_inputs.json -p --allowed-rules make_edit_fraction_bedgraph --nocolor --notemp --no-hooks --nolock \
+--mode 2  && touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/47.jobfinished" || (touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/47.jobfailed"; exit 1)
+
+Submitted job 47 with external jobid '28013849[].tscc-mgr7.local'.
+
+[Fri Jan 21 16:09:30 2022]
+rule make_edit_fraction_bedgraph:
+    input: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-B3_S8_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed
+    output: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-B3_S8_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph
+    jobid: 53
+    wildcards: sample=Hugo-B3_S8_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam
+
+
+        python /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP//workflow_sailor/scripts/edit_fraction_bedgraph.py /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-B3_S8_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-B3_S8_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed.edit_fraction.bedgraph
+        
+Jobscript:
+#!/bin/sh
+# properties = {"type": "single", "rule": "make_edit_fraction_bedgraph", "local": false, "input": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-B3_S8_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed"], "output": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-B3_S8_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph"], "wildcards": {"sample": "Hugo-B3_S8_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam"}, "params": {"prefix": "Hugo-B3_S8_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed", "stamp_dir_path": "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/", "output_dir_path": "/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs", "run_time": "00:30:00", "threads": "1"}, "log": [], "threads": 1, "resources": {}, "jobid": 53, "cluster": {"jobname": "make_edit_fraction_bedgraph.sample=Hugo-B3_S8_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam", "nodes": 1, "ppn": "1", "walltime": "00:30:00", "array": 0, "account": "yeo-group", "queue": "home"}}
+cd /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts && \
+/projects/ps-yeolab4/software/yeolabconda3/envs/snakemake-5.8.2/bin/python3.9 \
+-m snakemake /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-B3_S8_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph --snakefile /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/Snakefile \
+--force -j --keep-target-files --keep-remote \
+--wait-for-files /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5 /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-B3_S8_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed --latency-wait 50 \
+ --attempt 1 --force-use-threads \
+--wrapper-prefix https://github.com/snakemake/snakemake-wrappers/raw/ \
+ --configfiles /projects/ps-yeolab3/ekofman/Hugo/FullRBPsWithEnzymes/sailor_inputs.json -p --allowed-rules make_edit_fraction_bedgraph --nocolor --notemp --no-hooks --nolock \
+--mode 2  && touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/53.jobfinished" || (touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/53.jobfailed"; exit 1)
+
+Submitted job 53 with external jobid '28013850[].tscc-mgr7.local'.
+
+[Fri Jan 21 16:09:31 2022]
+rule make_edit_fraction_bedgraph:
+    input: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-A5_S4_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed
+    output: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-A5_S4_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph
+    jobid: 37
+    wildcards: sample=Hugo-A5_S4_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam
+
+
+        python /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP//workflow_sailor/scripts/edit_fraction_bedgraph.py /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-A5_S4_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-A5_S4_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed.edit_fraction.bedgraph
+        
+Jobscript:
+#!/bin/sh
+# properties = {"type": "single", "rule": "make_edit_fraction_bedgraph", "local": false, "input": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-A5_S4_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed"], "output": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-A5_S4_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph"], "wildcards": {"sample": "Hugo-A5_S4_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam"}, "params": {"prefix": "Hugo-A5_S4_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed", "stamp_dir_path": "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/", "output_dir_path": "/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs", "run_time": "00:30:00", "threads": "1"}, "log": [], "threads": 1, "resources": {}, "jobid": 37, "cluster": {"jobname": "make_edit_fraction_bedgraph.sample=Hugo-A5_S4_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam", "nodes": 1, "ppn": "1", "walltime": "00:30:00", "array": 0, "account": "yeo-group", "queue": "home"}}
+cd /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts && \
+/projects/ps-yeolab4/software/yeolabconda3/envs/snakemake-5.8.2/bin/python3.9 \
+-m snakemake /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-A5_S4_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph --snakefile /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/Snakefile \
+--force -j --keep-target-files --keep-remote \
+--wait-for-files /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5 /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-A5_S4_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed --latency-wait 50 \
+ --attempt 1 --force-use-threads \
+--wrapper-prefix https://github.com/snakemake/snakemake-wrappers/raw/ \
+ --configfiles /projects/ps-yeolab3/ekofman/Hugo/FullRBPsWithEnzymes/sailor_inputs.json -p --allowed-rules make_edit_fraction_bedgraph --nocolor --notemp --no-hooks --nolock \
+--mode 2  && touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/37.jobfinished" || (touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/37.jobfailed"; exit 1)
+
+Submitted job 37 with external jobid '28013851[].tscc-mgr7.local'.
+
+[Fri Jan 21 16:09:31 2022]
+rule make_edit_fraction_bedgraph:
+    input: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-C6_S15_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed
+    output: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-C6_S15_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph
+    jobid: 65
+    wildcards: sample=Hugo-C6_S15_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam
+
+
+        python /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP//workflow_sailor/scripts/edit_fraction_bedgraph.py /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-C6_S15_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-C6_S15_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed.edit_fraction.bedgraph
+        
+Jobscript:
+#!/bin/sh
+# properties = {"type": "single", "rule": "make_edit_fraction_bedgraph", "local": false, "input": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-C6_S15_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed"], "output": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-C6_S15_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph"], "wildcards": {"sample": "Hugo-C6_S15_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam"}, "params": {"prefix": "Hugo-C6_S15_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed", "stamp_dir_path": "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/", "output_dir_path": "/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs", "run_time": "00:30:00", "threads": "1"}, "log": [], "threads": 1, "resources": {}, "jobid": 65, "cluster": {"jobname": "make_edit_fraction_bedgraph.sample=Hugo-C6_S15_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam", "nodes": 1, "ppn": "1", "walltime": "00:30:00", "array": 0, "account": "yeo-group", "queue": "home"}}
+cd /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts && \
+/projects/ps-yeolab4/software/yeolabconda3/envs/snakemake-5.8.2/bin/python3.9 \
+-m snakemake /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-C6_S15_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph --snakefile /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/Snakefile \
+--force -j --keep-target-files --keep-remote \
+--wait-for-files /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5 /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-C6_S15_L001_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed --latency-wait 50 \
+ --attempt 1 --force-use-threads \
+--wrapper-prefix https://github.com/snakemake/snakemake-wrappers/raw/ \
+ --configfiles /projects/ps-yeolab3/ekofman/Hugo/FullRBPsWithEnzymes/sailor_inputs.json -p --allowed-rules make_edit_fraction_bedgraph --nocolor --notemp --no-hooks --nolock \
+--mode 2  && touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/65.jobfinished" || (touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/65.jobfailed"; exit 1)
+
+Submitted job 65 with external jobid '28013852[].tscc-mgr7.local'.
+
+[Fri Jan 21 16:09:31 2022]
+rule make_edit_fraction_bedgraph:
+    input: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-F3_S85_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed
+    output: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-F3_S85_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph
+    jobid: 62
+    wildcards: sample=Hugo-F3_S85_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam
+
+
+        python /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP//workflow_sailor/scripts/edit_fraction_bedgraph.py /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-F3_S85_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-F3_S85_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed.edit_fraction.bedgraph
+        
+Jobscript:
+#!/bin/sh
+# properties = {"type": "single", "rule": "make_edit_fraction_bedgraph", "local": false, "input": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-F3_S85_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed"], "output": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-F3_S85_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph"], "wildcards": {"sample": "Hugo-F3_S85_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam"}, "params": {"prefix": "Hugo-F3_S85_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed", "stamp_dir_path": "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/", "output_dir_path": "/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs", "run_time": "00:30:00", "threads": "1"}, "log": [], "threads": 1, "resources": {}, "jobid": 62, "cluster": {"jobname": "make_edit_fraction_bedgraph.sample=Hugo-F3_S85_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam", "nodes": 1, "ppn": "1", "walltime": "00:30:00", "array": 0, "account": "yeo-group", "queue": "home"}}
+cd /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts && \
+/projects/ps-yeolab4/software/yeolabconda3/envs/snakemake-5.8.2/bin/python3.9 \
+-m snakemake /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-F3_S85_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph --snakefile /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/Snakefile \
+--force -j --keep-target-files --keep-remote \
+--wait-for-files /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5 /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-F3_S85_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed --latency-wait 50 \
+ --attempt 1 --force-use-threads \
+--wrapper-prefix https://github.com/snakemake/snakemake-wrappers/raw/ \
+ --configfiles /projects/ps-yeolab3/ekofman/Hugo/FullRBPsWithEnzymes/sailor_inputs.json -p --allowed-rules make_edit_fraction_bedgraph --nocolor --notemp --no-hooks --nolock \
+--mode 2  && touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/62.jobfinished" || (touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/62.jobfailed"; exit 1)
+
+Submitted job 62 with external jobid '28013853[].tscc-mgr7.local'.
+
+[Fri Jan 21 16:09:31 2022]
+rule make_edit_fraction_bedgraph:
+    input: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-F1_S84_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed
+    output: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-F1_S84_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph
+    jobid: 38
+    wildcards: sample=Hugo-F1_S84_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam
+
+
+        python /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP//workflow_sailor/scripts/edit_fraction_bedgraph.py /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-F1_S84_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-F1_S84_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed.edit_fraction.bedgraph
+        
+Jobscript:
+#!/bin/sh
+# properties = {"type": "single", "rule": "make_edit_fraction_bedgraph", "local": false, "input": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-F1_S84_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed"], "output": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-F1_S84_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph"], "wildcards": {"sample": "Hugo-F1_S84_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam"}, "params": {"prefix": "Hugo-F1_S84_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed", "stamp_dir_path": "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/", "output_dir_path": "/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs", "run_time": "00:30:00", "threads": "1"}, "log": [], "threads": 1, "resources": {}, "jobid": 38, "cluster": {"jobname": "make_edit_fraction_bedgraph.sample=Hugo-F1_S84_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam", "nodes": 1, "ppn": "1", "walltime": "00:30:00", "array": 0, "account": "yeo-group", "queue": "home"}}
+cd /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts && \
+/projects/ps-yeolab4/software/yeolabconda3/envs/snakemake-5.8.2/bin/python3.9 \
+-m snakemake /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-F1_S84_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph --snakefile /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/Snakefile \
+--force -j --keep-target-files --keep-remote \
+--wait-for-files /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5 /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-F1_S84_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed --latency-wait 50 \
+ --attempt 1 --force-use-threads \
+--wrapper-prefix https://github.com/snakemake/snakemake-wrappers/raw/ \
+ --configfiles /projects/ps-yeolab3/ekofman/Hugo/FullRBPsWithEnzymes/sailor_inputs.json -p --allowed-rules make_edit_fraction_bedgraph --nocolor --notemp --no-hooks --nolock \
+--mode 2  && touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/38.jobfinished" || (touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/38.jobfailed"; exit 1)
+
+Submitted job 38 with external jobid '28013854[].tscc-mgr7.local'.
+
+[Fri Jan 21 16:09:31 2022]
+rule make_edit_fraction_bedgraph:
+    input: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-E3_S80_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed
+    output: /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-E3_S80_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph
+    jobid: 48
+    wildcards: sample=Hugo-E3_S80_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam
+
+
+        python /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP//workflow_sailor/scripts/edit_fraction_bedgraph.py /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-E3_S80_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-E3_S80_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed.edit_fraction.bedgraph
+        
+Jobscript:
+#!/bin/sh
+# properties = {"type": "single", "rule": "make_edit_fraction_bedgraph", "local": false, "input": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-E3_S80_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed"], "output": ["/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-E3_S80_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph"], "wildcards": {"sample": "Hugo-E3_S80_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam"}, "params": {"prefix": "Hugo-E3_S80_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.fwd.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed", "stamp_dir_path": "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/", "output_dir_path": "/projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs", "run_time": "00:30:00", "threads": "1"}, "log": [], "threads": 1, "resources": {}, "jobid": 48, "cluster": {"jobname": "make_edit_fraction_bedgraph.sample=Hugo-E3_S80_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam", "nodes": 1, "ppn": "1", "walltime": "00:30:00", "array": 0, "account": "yeo-group", "queue": "home"}}
+cd /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts && \
+/projects/ps-yeolab4/software/yeolabconda3/envs/snakemake-5.8.2/bin/python3.9 \
+-m snakemake /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/9_edit_fraction_bedgraphs/Hugo-E3_S80_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.edit_fraction.bedgraph --snakefile /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/Snakefile \
+--force -j --keep-target-files --keep-remote \
+--wait-for-files /projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5 /projects/ps-yeolab4/ekofman/Hugo/FullRBPsWithEnzymes/sailor_outs/Hugo-E3_S80_L002_R1_001.fastqTr.sorted.STARUnmapped.out.sorted.STARAligned.out.sorted.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed --latency-wait 50 \
+ --attempt 1 --force-use-threads \
+--wrapper-prefix https://github.com/snakemake/snakemake-wrappers/raw/ \
+ --configfiles /projects/ps-yeolab3/ekofman/Hugo/FullRBPsWithEnzymes/sailor_inputs.json -p --allowed-rules make_edit_fraction_bedgraph --nocolor --notemp --no-hooks --nolock \
+--mode 2  && touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/48.jobfinished" || (touch "/projects/ps-yeolab3/ekofman/sc_STAMP_pipeline/STAMP/workflow_sailor/scripts/.snakemake/tmp.kxnwtpu5/48.jobfailed"; exit 1)
+
+Submitted job 48 with external jobid '28013855[].tscc-mgr7.local'.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
+Checking status of 32 jobs.
