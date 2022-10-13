@@ -1,4 +1,4 @@
-# FLARE
+![FLARE](FLARE_logo.png "FLARE")
 
 ### FLagging Areas of RNA-editing Enrichment (FLARE) 
 
