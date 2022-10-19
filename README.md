@@ -12,7 +12,7 @@ We present FLagging Areas of RNA-editing Enrichment (FLARE),  a Snakemake-based 
 
 * You also will need to have Singularity installed for several steps of the pipeline to work. We have created singularity images containing all necessary python packages that will automatically be loaded for you in the course of running the pipeline, as long as your system has singularity installed.
 
-# Running the SAILOR snakemake pipeline
+# Running the SAILOR (edit site finding) snakemake pipeline
 
 ## Before you start:
 
@@ -105,7 +105,7 @@ An example set of completed outputs from a successful SAILOR run, using the smal
 subsampled.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed
 ```
 
-# Running the peakcalling snakemake pipeline
+# Running the FLARE (peakcalling) snakemake pipeline
 
 ## Before you start:
 
