@@ -188,3 +188,21 @@ This will create a new folder within the folder you specified at the "output_fol
 
 The final scored peaks are found within the peak_calling folder, in this example *label_for_this_sample.fdr_0.1.d_15.scored.tsv*.
 
+# Output format
+The  columns in the final scored peaks file are:
+
+* *chrom* - Chromosome
+* *start* - Start coordinate 
+* *end* - End coordinate
+* *edit_fraction* - Fraction of target bases edited
+* *strand* - Strand 
+* *target_bases* - Number of target bases
+* *edited_bases* - Number of edited bases
+* *num_edited_reads* - Number of edited reads (at least one edit) overlapping region
+* *total_reads_in_region* - Number of reads overlapping region
+* *fraction_reads_edited* - Fraction of reads overlapping region with at least one edit
+* *mean_depth* - Mean coverage in region
+* *num_substrate_bases* - Number of editable bases the sequence which the region spans contains (i.e. when editing Cs, region sequence AACTAGACTGGC would yield 3)
+* *score* - Negative binomial-derived score for peak, useful in prioritizing peaks
+
+
