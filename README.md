@@ -1,19 +1,18 @@
-# STAMP Pipelines
+![FLARE](FLARE_logo.png "FLARE")
 
-For folks using tscc the Yeo lab, all required libraries for running the snakemake jobs comprising this suite of STAMP analysis tools can be loaded with the command
-```
-    module load stamp
-```
+### FLagging Areas of RNA-editing Enrichment (FLARE) 
 
-For others:
+We present FLagging Areas of RNA-editing Enrichment (FLARE),  a Snakemake-based pipeline that uses a statistical approach to determine regions of enriched RNA editing, using SAILOR-derived editing sites as a starting point. FLARE is configurable for use with any type of base pair change – we include with this release of FLARE an update of SAILOR to enable detection of all edit types.
+
+# Requirements
 
 * Your system must be at least Linux Centos7
 
-* Make sure that the environment your STAMP processing pipelines will be running on have snakemake installed (https://snakemake.readthedocs.io/en/v5.6.0/getting_started/installation.html). 
+* Make sure that the environment your SAILOR and FLARE processing pipelines will be running on have snakemake installed (https://snakemake.readthedocs.io/en/v5.6.0/getting_started/installation.html). 
 
-* You also will need to have singularity installed for several steps of the pipeline to work. We have created singularity images containing all necessary python packages that will automatically be loaded for you in the course of running the pipeline, as long as your system has singularity installed.
+* You also will need to have Singularity installed for several steps of the pipeline to work. We have created singularity images containing all necessary python packages that will automatically be loaded for you in the course of running the pipeline, as long as your system has singularity installed.
 
-# Running the SAILOR snakemake pipeline
+# Running the SAILOR (edit site finding) snakemake pipeline
 
 ## Before you start:
 
@@ -49,16 +48,16 @@ All SAILOR configuration information must be saved in a .json file with the foll
 ```
 Create your .json config file and call it something sensible based on your experiment, for example 'sailor.json'. Multiple .bam files contained in one directory can be processed with one run of the SAILOR pipeline.
 
-In order to run a snakemake pipeline, there a few parameters that snakemake needs to know about. The first is which Snakefile to use -- the Snakefile contains the instructions for running each step of the pipeline, and for the SAILOR pipeline will be found at your local version of /STAMP/workflow_sailor/Snakefile. The second is which config file to use -- this is the config file you just created, which contains the parameters particular to your run of the pipeline. Always absolute paths. You will also need to tell snakemake to use singularity, and specify singularity arugments allowing the virtual environments to have access to your local filesystem -- the "bind" parameters should reflect locations that the pipeline should have access to, for example folders containing relevant input bams, fastas, gtfs or dbsnp files. So, an example snakemake run could like like the following:
+In order to run a snakemake pipeline, there a few parameters that snakemake needs to know about. The first is which Snakefile to use -- the Snakefile contains the instructions for running each step of the pipeline, and for the SAILOR pipeline will be found at your local version of /FLARE/workflow_sailor/Snakefile. The second is which config file to use -- this is the config file you just created, which contains the parameters particular to your run of the pipeline. Always absolute paths. You will also need to tell snakemake to use singularity, and specify singularity arugments allowing the virtual environments to have access to your local filesystem -- the "bind" parameters should reflect locations that the pipeline should have access to, for example folders containing relevant input bams, fastas, gtfs or dbsnp files. So, an example snakemake run could like like the following:
 
 `
-snakemake --snakefile /full/path/to/STAMP/workflow_sailor/Snakefile --configfile /full/path/to/your/config/file/sailor.json --verbose --use-singularity     --singularity-args '--bind /home --bind /projects'  -j1
+snakemake --snakefile /full/path/to/FLARE/workflow_sailor/Snakefile --configfile /full/path/to/your/config/file/sailor.json --verbose --use-singularity     --singularity-args '--bind /home --bind /projects'  -j1
 `
 
 However, this will launch the snakemake pipeline on your head node, and all subsequent snakemake jobs (which can number into the hundreds depending on how many samples you are processing) will also be run there. 
 
 ## Instructions on HPCC (cluster with submission):
-If you have access to a high performance compute cluster, you probably want jobs to be automatically submitted to this system instead so that you can take full advantage of the parallelization built into this pipeline, especially if you are analyzing many samples. Cluster submission information can be placed into a "profile" file. In this case, you can model your profile file on the file at /full/path/to/STAMP/profiles/tscc_sailor/config.yaml, which by default has the following contents:
+If you have access to a high performance compute cluster, you probably want jobs to be automatically submitted to this system instead so that you can take full advantage of the parallelization built into this pipeline, especially if you are analyzing many samples. Cluster submission information can be placed into a "profile" file. In this case, you can model your profile file on the file at /full/path/to/FLARE/profiles/tscc_sailor/config.yaml, which by default has the following contents:
 
 ```
 cluster: "qsub -N {rule}.{wildcards} -l nodes=1:ppn={params.threads},walltime={params.run_time} -A yeo-group -q home -V -t 0"
@@ -67,7 +66,7 @@ notemp: false
 latency: 300
 printshellcmds: true
 directory: .
-snakefile: /path/to/STAMP/workflow_sailor/Snakefile
+snakefile: /path/to/FLARE/workflow_sailor/Snakefile
 use-singularity: true
 singularity-args: '--bind /oasis --bind /projects --bind /home'
 jobs: 8
@@ -84,11 +83,11 @@ nolock: true
 * Change "singularity-prefix" to reflect the absolute path to where you want the singularity images used for the run to be stored (should have a lot of space)
 * Change "jobs" to reflect the maximum number of jobs you want submitted to your cluster simulataneously
 
-Put your profile configuration .yaml file in a new folder you can call /full/path/to/STAMP/profiles/my_profile/, for example.
+Put your profile configuration .yaml file in a new folder you can call /full/path/to/FLARE/profiles/my_profile/, for example.
 With more run information tucked away into the profile file, the snakemake launch command becomes simpler as it can reference the parameters from this profile file (note that it is actually the folder containing the profile.yaml file that is specified, not the file itself):
 
 `
-snakemake --profile /full/path/to/STAMP/profiles/my_profile/ --configfile /full/path/to/your/config/file/sailor.json
+snakemake --profile /full/path/to/FLARE/profiles/my_profile/ --configfile /full/path/to/your/config/file/sailor.json
 `
 
 Running that command should launch your SAILOR run.
@@ -106,7 +105,7 @@ An example set of completed outputs from a successful SAILOR run, using the smal
 subsampled.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed
 ```
 
-# Running the peakcalling snakemake pipeline
+# Running the FLARE (peakcalling) snakemake pipeline
 
 ## Before you start:
 
@@ -157,7 +156,7 @@ Once this completes, you will have one .json file for each sample successfully p
 
 Using the same config.yaml file you made previously to launch your sailor run, you can then launch the peak-calling pipeline similarly for each sample:
 `
-snakemake --profile /full/path/to/STAMP/profiles/my_profile/ --configfile /full/path/to/your/config/file/peakcalling_info_for_this_sample.json
+snakemake --profile /full/path/to/FLARE/profiles/my_profile/ --configfile /full/path/to/your/config/file/peakcalling_info_for_this_sample.json
 `
 
 This will create a new folder within the folder you specified at the "output_folder" parameter. Within that folder, a series of subfolders will be created as the job runs. The ultimate output you should expect will end up looking like this:
@@ -188,4 +187,22 @@ This will create a new folder within the folder you specified at the "output_fol
 ```
 
 The final scored peaks are found within the peak_calling folder, in this example *label_for_this_sample.fdr_0.1.d_15.scored.tsv*.
+
+# Output format
+The  columns in the final scored peaks file are:
+
+* *chrom* - Chromosome
+* *start* - Start coordinate 
+* *end* - End coordinate
+* *edit_fraction* - Fraction of target bases edited
+* *strand* - Strand 
+* *target_bases* - Number of target bases
+* *edited_bases* - Number of edited bases
+* *num_edited_reads* - Number of edited reads (at least one edit) overlapping region
+* *total_reads_in_region* - Number of reads overlapping region
+* *fraction_reads_edited* - Fraction of reads overlapping region with at least one edit
+* *mean_depth* - Mean coverage in region
+* *num_substrate_bases* - Number of editable bases the sequence which the region spans contains (i.e. when editing Cs, region sequence AACTAGACTGGC would yield 3)
+* *score* - Negative binomial-derived score for peak, useful in prioritizing peaks
+
 
