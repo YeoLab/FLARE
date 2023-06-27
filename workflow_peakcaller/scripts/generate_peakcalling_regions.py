@@ -7,15 +7,24 @@ from argparse import ArgumentParser
 
 # num rows per chunk -- you can increase if you want to reduce the number of jobs you kick off, but increase the runtime per job,
 # or decrease it if you want to increase the number of jobs you kick off but decrease the runtime per job.
-CHUNK_SIZE = 7500000
+CHUNK_SIZE = 1000000
 
 
 def get_gene(annot):
-    return annot.split('gene_name \"')[1].split('\"')[0]
+    try:
+        genename = annot.split('gene_name \"')[1].split('\"')[0]
+        return genename
+    except Exception as e:
+        genename = str(annot.split('gene_id \"')[1].split('\"')[0])
+        return genename
+    
 
 def to_tuple(gene):
-    return gene.split(',')
-
+    try:
+        return gene.split(',')
+    except Exception as e:
+        return ''
+        
 def sort_and_explode_bed(df):
     df_bed = pybedtools.BedTool.from_dataframe(df[['chrom', 'start', 'end', 'annot', 'gene_name', 'strand']])
     df_bed_merged_sorted = df_bed.sort().merge(s=True, c=[4,5,6], o=['first', 'distinct', 'distinct'])
@@ -130,6 +139,10 @@ def main(gtf_path, output_dir, window_size):
     genes_bed_merged_sorted_df_exploded_bed = sort_and_explode_bed(genes)
     print("Making a dataframe including all introns and exons, ordered, for each gene...")
     introns_and_exons_sorted_df = get_intron_and_exons_df(genes_bed_merged_sorted_df_exploded_bed, exons_bed_merged_sorted_df_exploded_bed)
+    
+    print("Outputting region map...")
+    introns_and_exons_sorted_df[['chrom', 'start', 'end', 'region', 'gene', 'strand']].to_csv('{}_region_map.bed'.format(output_dir), sep='\t', header=False, index=False)
+    
     print("Outputing regions files... this will take a while.")
     output_region_files(introns_and_exons_sorted_df, output_dir, window_size)
     print("Done!")
