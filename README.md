@@ -105,64 +105,64 @@ An example set of completed outputs from a successful SAILOR run, using the smal
 subsampled.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed
 ```
 
-# Running the FLARE (peakcalling) snakemake pipeline
+# Running the FLARE (cluster identification) snakemake pipeline
 
 ## Before you start:
 
-To run the peakcalling pipeline, you will first need a file specifying the regions in which peakcalling will occur. To generate this file, use the script in workflow_peakcaller/scripts called generate_peakcalling_regions.py
+To run the FLARE pipeline, you will first need a file specifying the regions in which cluster identification will occur. To generate this file, use the script in workflow_FLARE/scripts called generate_regions.py
 
-Copy this script to wherever you'd like to generate the helper files, which will be take up about 8-10 GB of space. Then run the script by typing   `generate_peakcalling_regions.py <full/path/to/your/genome/gtf/file> <genome_name>_peakcalling_regions`
+Copy this script to wherever you'd like to generate the helper files, which will be take up about 8-10 GB of space. Then run the script by typing   `generate_regions.py <full/path/to/your/genome/gtf/file> <genome_name>_regions`
 
 The .gtf file you use should include gene and exon level information, i.e. the third column should at least contain the descriptors "gene" and "exon."
 
 If using the following command, for example:
-`generate_peakcalling_regions.py <full/path/to/your/genome/gtf/mm10.gtf > mm10_peakcalling_regions`
+`generate_regions.py <full/path/to/your/genome/gtf/mm10.gtf > mm10_regions`
 
-Once the script finishes running, you will see a new folder called mm10_peakcalling_regions, and within that folder a slew of files with increasing indices, i.e. mm10_peakcalling_regions_0, mm10_peakcalling_regions_1... 
+Once the script finishes running, you will see a new folder called mm10_regions, and within that folder a slew of files with increasing indices, i.e. mm10_regions_0, mm10_regions_1... 
 
 ## Parameters
-All peakcaller configuration information must be saved in a .json file with the following contents:
+All FLARE configuration information must be saved in a .json file with the following contents:
 ```
 {
     "label": "label_for_this_sample",
-    "output_folder": "/absolute/path/to/peakcalling/folder/outputs_where_all_samples_will_be_placed/peakcalling_outputs/",
+    "output_folder": "/absolute/path/to/folder/outputs_where_all_samples_will_be_placed/outputs/",
     "stamp_sites_file": "/absolute/path/to/sailor/output/this_sample.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed",
     "forward_bw": "/absolute/path/to/sailor/output/8_bw_and_bam/this_sample.sortedByCoord.out.bam.fwd.sorted.bw",
     "reverse_bw": "/absolute/path/to/sailor/output/8_bw_and_bam/this_sample.sortedByCoord.out.bam.rev.sorted.bw",
     "fasta": "/path/to/fasta/used/to/align/genome.fa",
-    "regions": "/absolute/path/to/peakcalling_regions/folder",
+    "regions": "/absolute/path/to/regions/folder",
     "edit_type": "CT", (or "AG", "TC", etc.-- should be same as what was used in SAILOR run)
     "bam": "/absolute/path/to/sailor/output/8_bw_and_bam/this_sample.sortedByCoord.out.bam_filtered_merged.sorted.bam"
 }
 ```
 
-Note that this specifies parameters for peakcalling of only *one* sample. Four of the inputs to the peakcalling pipeline are SAILOR outputs for this sample,
-and of those, three are specifically contained in the 8_bw_and_bam folder from that SAILOR run. Other than that, you must specify the edit type (should be the same as whatever was specified for the SAILOR run), a label for your sample, the overall output folder where you want the peakcalling folder for this sample to be generated, and the fasta that was used to align the genome (same sample as was used for the SAILOR run). 
+Note that this specifies parameters for FLARE for only *one* sample. Four of the inputs to the FLARE pipeline are SAILOR outputs for this sample,
+and of those, three are specifically contained in the 8_bw_and_bam folder from that SAILOR run. Other than that, you must specify the edit type (should be the same as whatever was specified for the SAILOR run), a label for your sample, the overall output folder where you want the FLARE folder for this sample to be generated, and the fasta that was used to align the genome (same sample as was used for the SAILOR run). 
 
-### Use the make_peakcalling_jsons.py to set up configuration .json files for multiple samples
-If you are calling peaks on many samples, it will be too time consuming to manually create .json files for each sample. Instead, use the provided make_peakcalling_jsons.py script, which can be found in workflow_peakcaller/scripts, to generate all .json files simultaneously.
+### Use the make_FLARE_jsons.py to set up configuration .json files for multiple samples
+If you are identifying clusters for many samples, it will be too time consuming to manually create .json files for each sample. Instead, use the provided make_FLARE_jsons.py script, which can be found in workflow_FLARE/scripts, to generate all .json files simultaneously.
 
 * First create a new folder where these .jsons will be stored. 
-* Also create a folder where all peakcalling outputs will be stored.
+* Also create a folder where all FLARE outputs will be stored.
 * Then, call the script using the following parameters:
 
     `
-    python make_peakcalling_jsons.py <path_to_sailor_output_folder> <path_to_new_folder_where_jsons_will_be_placed> <path_to_new_folder_where_peakcalling_outputs_will_be_placed> <path_to_peakcalling_regions_folder> <path_to_fasta_used_for_alignment> <edit_type (i.e. CT or AG)> <fdr_threshold (default 0.1)>
+    python make_FLARE_jsons.py <path_to_sailor_output_folder> <path_to_new_folder_where_jsons_will_be_placed> <path_to_new_folder_where_FLARE_outputs_will_be_placed> <path_to_regions_folder> <path_to_fasta_used_for_alignment> <edit_type (i.e. CT or AG)> <fdr_threshold (default 0.1)>
     `
 
 Once this completes, you will have one .json file for each sample successfully processed by SAILOR.
 
 ### Launch the snakemake job
 
-Using the same config.yaml file you made previously to launch your sailor run, you can then launch the peak-calling pipeline similarly for each sample:
+Using the same config.yaml file you made previously to launch your sailor run, you can then launch the FLARE pipeline similarly for each sample:
 `
-snakemake --profile /full/path/to/FLARE/profiles/my_profile/ --configfile /full/path/to/your/config/file/peakcalling_info_for_this_sample.json
+snakemake --profile /full/path/to/FLARE/profiles/my_profile/ --configfile /full/path/to/your/config/file/FLARE_info_for_this_sample.json
 `
 
 This will create a new folder within the folder you specified at the "output_folder" parameter. Within that folder, a series of subfolders will be created as the job runs. The ultimate output you should expect will end up looking like this:
 
 ```
-/absolute/path/to/peakcalling/folder/outputs_where_all_samples_will_be_placed/peakcalling_outputs/
+/absolute/path/to/FLARE/folder/outputs_where_all_samples_will_be_placed/FLARE_outputs/
     >bash_scripts
         > label_for_this_sample
             > label_for_this_sample_bash_job_edit_c_0.sh 
@@ -186,10 +186,10 @@ This will create a new folder within the folder you specified at the "output_fol
         label_for_this_sample.fdr_0.1.d_15.scored.tsv
 ```
 
-The final scored peaks are found within the peak_calling folder, in this example *label_for_this_sample.fdr_0.1.d_15.scored.tsv*.
+The final scored clusters are found within the peak_calling folder, in this example *label_for_this_sample.fdr_0.1.d_15.scored.tsv*.
 
 # Output format
-The  columns in the final scored peaks file are:
+The  columns in the final scored files are:
 
 * *chrom* - Chromosome
 * *start* - Start coordinate 
@@ -203,6 +203,6 @@ The  columns in the final scored peaks file are:
 * *fraction_reads_edited* - Fraction of reads overlapping region with at least one edit
 * *mean_depth* - Mean coverage in region
 * *num_substrate_bases* - Number of editable bases the sequence which the region spans contains (i.e. when editing Cs, region sequence AACTAGACTGGC would yield 3)
-* *score* - Negative binomial-derived score for peak, useful in prioritizing peaks
+* *score* - Negative binomial-derived score for cluster, useful in prioritizing clusters
 
 
