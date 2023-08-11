@@ -1,4 +1,4 @@
-![FLARE](FLARE_logo.png "FLARE")
+F![FLARE](FLARE_logo.png "FLARE")
 
 ### FLagging Areas of RNA-editing Enrichment (FLARE) 
 
@@ -125,7 +125,7 @@ All FLARE configuration information must be saved in a .json file with the follo
 ```
 {
     "label": "label_for_this_sample",
-    "output_folder": "/absolute/path/to/folder/outputs_where_all_samples_will_be_placed/outputs/",
+    "output_folder": "/absolute/path/to/folder/outputs_where_all_samples_will_be_placed/FLARE_outputs/",
     "stamp_sites_file": "/absolute/path/to/sailor/output/this_sample.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed",
     "forward_bw": "/absolute/path/to/sailor/output/8_bw_and_bam/this_sample.sortedByCoord.out.bam.fwd.sorted.bw",
     "reverse_bw": "/absolute/path/to/sailor/output/8_bw_and_bam/this_sample.sortedByCoord.out.bam.rev.sorted.bw",
@@ -177,7 +177,7 @@ This will create a new folder within the folder you specified at the "output_fol
             > ...
             > label_for_this_sample_edit_c_for_all_regions_number_of_regions_all_info.filtered_regions.tsv
             > label_for_this_sample_edit_c_for_all_regions_number_of_regions_0_all_info.tsv
-    >peak_calling
+    >FLARE
         > label_for_this_sample
             > label_for_this_sample.fdr_0.1.d_15.edit_fraction.filtered_regions.tsv
             > label_for_this_sample.fdr_0.1.d_15.edit_fraction.tsv
@@ -186,7 +186,7 @@ This will create a new folder within the folder you specified at the "output_fol
         label_for_this_sample.fdr_0.1.d_15.scored.tsv
 ```
 
-The final scored clusters are found within the peak_calling folder, in this example *label_for_this_sample.fdr_0.1.d_15.scored.tsv*.
+The final scored clusters are found within the FLARE folder, in this example *label_for_this_sample.fdr_0.1.d_15.scored.tsv*.
 
 # Output format
 The  columns in the final scored files are:
