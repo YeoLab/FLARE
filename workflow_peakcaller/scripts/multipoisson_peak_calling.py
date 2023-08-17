@@ -43,6 +43,7 @@ def poisson_filter(edit_c_df):
 
     prefix = 'subregion_'
     region_sites['{}fraction'.format(prefix)] = (region_sites['{}conversions'.format(prefix)]-region_sites['edited_bases'])/(region_sites['{}coverage'.format(prefix)] - region_sites['target_bases'])
+    region_sites.replace([np.inf, -np.inf], np.nan, inplace=True)
     region_sites = region_sites.fillna(0)
     
     depth_windows = [0, 10, 20, 30, 40, 50, 1000000]

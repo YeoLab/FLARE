@@ -2,7 +2,7 @@ import argparse
 import os
 import pandas as pd
 import sys    
-import pandas as pd
+import numpy as np
 from scipy.stats import nbinom
 
 parser = argparse.ArgumentParser(description='Add statistical score to peaks')
@@ -10,22 +10,19 @@ parser.add_argument('peaks_with_edit_fraction', type=str)
 parser.add_argument('peaks_with_scores', type=str)
 parser.add_argument('all_windows_with_fdr')
 
-
-
 args = parser.parse_args()
 peaks_with_edit_fraction = args.peaks_with_edit_fraction
 peaks_with_scores = args.peaks_with_scores
 all_windows_with_fdr = args.all_windows_with_fdr 
 
 all_windows = pd.read_csv(all_windows_with_fdr, sep='\t')
+all_windows.replace([np.inf, -np.inf], np.nan, inplace=True)
+all_windows = all_windows.fillna(0)
 background_rate = all_windows.subregion_fraction.mean()
-
 
 print("Input file specified: {}".format(peaks_with_edit_fraction))
 print("Input file specified: {}".format(peaks_with_scores))
-
 print("Background rate for negative binomial peak scoring calculated as: {}".format(background_rate))
-
 
 
 def get_confidence(conversions, coverage, frac=background_rate):
