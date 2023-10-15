@@ -1,5 +1,6 @@
 import os
 import sys
+import yaml
 
 args = sys.argv
 print('args are ', args)
@@ -23,13 +24,22 @@ def get_val_from_args(val_names):
     val = args[args.index(val_present) + 1]
     print('{} is {}'.format(val_present, val))
     
-    snakemake_directory = '/'.join(val.rstrip('/').split('/')[:-2])
+    if val_present == '--profile':  # read in profile doc to get snakedir
+        with open(os.path.join(val, 'config.yaml'), "r") as stream:
+            try:
+                return os.path.dirname(os.path.dirname(yaml.safe_load(stream)['snakefile']))
+            except yaml.YAMLError as exc:
+                print(exc)
+
+    snakemake_directory = os.path.dirname(os.path.dirname(val))
     print('STAMP directory is {}'.format(snakemake_directory))
+    if snakemake_directory.startswith('/'):  # abspath
+        return snakemake_directory
+    else:
+        return os.path.dirname(os.path.join(os.getcwd(), snakemake_directory))
 
-    return snakemake_directory
 
-
-snakemake_directory = get_val_from_args(['snakefile', 's', 'profile'])
+snakemake_directory = get_val_from_args(['snakefile', 's', 'profile'])  # should be FLARE directory
 scripts_directory='{}/workflow_sailor/scripts/'.format(snakemake_directory)
 print("Scripts directory is {}".format(scripts_directory))
 
