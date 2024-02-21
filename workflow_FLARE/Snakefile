@@ -166,8 +166,6 @@ rule make_merged_editc_bedgraph:
         run_time="00:30:00",
         label=config["label"],
         directory=config["output_folder"]
-    singularity:
-        "docker://jupyter/datascience-notebook:ubuntu-20.04"
     shell:
         """      
         echo "region_id\tchrom\tstart\tend\tedit_fraction\tstrand\ttarget_bases\tedited_bases\tnum_edited_reads\ttotal_reads_in_region\tfraction_reads_edited\tmean_depth\tnum_substrate_bases\tsubregion_coverage\tsubregion_conversions\tregion_coverage\tregion_conversions\tgene_coverage\tgene_conversions"  > {params.directory}/editc_outputs/{params.label}_edit_c_for_all_regions.tsv

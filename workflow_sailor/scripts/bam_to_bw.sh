@@ -5,6 +5,13 @@
 #module load bedtools
 #module load makebigwigfiles;
 
+
+#Sometimes have to link for new conda environments, if getting error:
+##     bedGraphToBigWig: error while loading shared libraries: libcrypto.so.1.0.0: cannot open shared object file: No such file or directory
+# Solution:
+#ln -s /tscc/nfs/home/ekofman/miniconda3/envs/workhorse/lib/libssl.so.3 /tscc/nfs/home/ekofman/miniconda3/envs/workhorse/lib/libssl.so.1.0.0
+#ln -s /tscc/nfs/home/ekofman/miniconda3/envs/workhorse/lib/libcrypto.so.3 /tscc/nfs/home/ekofman/miniconda3/envs/workhorse/lib/libcrypto.so.1.0.0
+
 # INPUTS:
 
 # This should be the full path to a bam file from which you wish to make stranded bigwigs files.
@@ -47,7 +54,9 @@ echo "Removing intermediate files..."
 rm $output_dir/$samplename.fwd.bg
 rm $output_dir/$samplename.rev.bg
 
-echo "Making chrom.sizes file from $fasta_index"
+echo "Making chrom.sizes file from $fasta_index ($fasta.fai)"
+echo "cut -f 1,2 $fasta.fai > $output_dir/chrom.sizes"
+
 cut -f 1,2 $fasta.fai > $output_dir/chrom.sizes
 
 echo "Bedgraph to bigwig"
