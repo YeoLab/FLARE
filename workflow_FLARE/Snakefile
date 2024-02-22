@@ -25,6 +25,20 @@ import os
 # DDX11L1:exon_0:11974-12004      chr1    11974   12004   +       exon_0  exon    DDX11L1
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+overall_output = []
+
+final_bedgraph = os.path.join(config["output_folder"], "bedgraphs", config["label"] + "_editc.bedgraph")
+merged_filtered_region_outputs = os.path.join(config["output_folder"], "editc_outputs", config["label"] + "_filtered_regions.tsv")
+scored_peaks = os.path.join(config["output_folder"], "FLARE", config["label"] + "_merged_sorted_peaks.fdr_" + str(config["fdr_threshold"]) + ".d_" + str(config["max_merge_dist"]) + ".scored.tsv")
+
+
+keep_all = config["keep_all"]
+print("keep_all is {}".format(keep_all))
+if keep_all:
+    overall_output.append('final_regions.txt')
+else:
+    overall_output = [final_bedgraph, merged_filtered_region_outputs, scored_peaks]
+
 
 regions = config["regions"]
 region_files = glob('{}/*'.format(regions))
@@ -82,11 +96,8 @@ print("FDR filtering threshold: {}".format(config['fdr_threshold']))
 
 rule all:
     input:
-        bedgraph=os.path.join(config["output_folder"], "bedgraphs", config["label"] + "_editc.bedgraph"),
-        merged_filtered_region_outputs=os.path.join(config["output_folder"], "editc_outputs", config["label"] + "_filtered_regions.tsv"),
-        scored_peaks=os.path.join(config["output_folder"], "FLARE", config["label"] + "_merged_sorted_peaks.fdr_" + str(config["fdr_threshold"]) + ".d_" + str(config["max_merge_dist"]) + ".scored.tsv")
+        overall_output
 
-        
 rule make_editc_array_jobs_script:
     input:
         fasta=config["fasta"],
