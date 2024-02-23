@@ -157,7 +157,8 @@ def get_num_edited_reads_and_coverage(chrom, start, end, edited_origin, edited_d
     chrom = str(chrom)
     
     reference = pybedtools.BedTool.seq([chrom,start,end], reference_path)
-
+    pybedtools.cleanup()
+    
     substrate_bases = [i.start()+start for i in re.finditer(edited_origin, reference.upper())]
     
     target_bases = set(substrate_bases).intersection(set(stamp_sites[stamp_sites.chrom_stamp.astype(str) == chrom].start_stamp))
@@ -251,6 +252,11 @@ def get_edit_c_info(t):
         edited_origin, edited_destination = get_origin_and_destination_bases(edit_type, strand=strand)
         num_edited_reads, mean_depth, total_reads_in_region, num_substrate_bases = get_num_edited_reads_and_coverage(chrom, start, end, edited_origin, edited_destination, bam_path, reference_path)
 
+        try:
+            fraction_reads_edited = num_edited_reads/total_reads_in_region
+        except Exception as e:
+            fraction_reads_edited = None
+            
         edit_fraction_info[region_label] = {
                                  'start': start,
                                  'end': end,
@@ -261,7 +267,7 @@ def get_edit_c_info(t):
                                  'edit_fraction': total_conversions/total_target_bases,
                                  'num_edited_reads': num_edited_reads,
                                  'total_reads_in_region': total_reads_in_region,
-                                 'fraction_reads_edited': num_edited_reads/total_reads_in_region,
+                                 'fraction_reads_edited': fraction_reads_edited,
                                  'mean_depth': mean_depth,
                                  'num_substrate_bases': num_substrate_bases
                                 }
@@ -284,23 +290,18 @@ def clean_edit_type_param(edit_type):
     edit_type = edit_type.replace('I', 'G')
     return edit_type
 
-def load_json_info(input_json_filepath, regions_override=None, control=False):
+def load_json_info(input_json_filepath, regions_override=None):
     # Load parameters/filepaths for stamp sites, bigwigs, and regions to probe editC in
     with open(input_json) as f:
         data = json.load(f)
 
     bam_path = data.get('bam')
     output_folder = data.get('output_folder')
-    if control:
-        label = data.get('control_label')
-        stamp_sites_file = data.get('control_stamp_sites_file')
-        forward_bw = data.get('control_forward_bw')
-        reverse_bw = data.get('control_reverse_bw')
-    else:
-        label = data.get('label')
-        stamp_sites_file = data.get('stamp_sites_file')
-        forward_bw = data.get('forward_bw')
-        reverse_bw = data.get('reverse_bw')
+
+    label = data.get('label')
+    stamp_sites_file = data.get('stamp_sites_file')
+    forward_bw = data.get('forward_bw')
+    reverse_bw = data.get('reverse_bw')
     fasta = data.get('fasta')
     regions_for_edit_c = data.get('regions_for_edit_c')
     edit_type = data.get('edit_type')
@@ -341,6 +342,9 @@ def keep_regions_with_edits(stamp_sites, regions_for_edit_c):
     regions_for_edit_c_bed =  pybedtools.BedTool.from_dataframe(regions_for_edit_c[['chrom', 'start', 'end', 'region_id', 'subregion', 'strand', 'region', 'gene']])
     
     regions_to_keep = regions_for_edit_c_bed.intersect(stamp_sites_bed, wa=True, wb=True, s=True).to_dataframe(names=['chrom', 'start', 'end', 'region_id', 'subregion', 'strand', 'region', 'gene', 'chrom_stamp', 'start_stamp', 'end_stamp', 'strand_stamp', 'strand_stamp1', 'strand_stamp2'])
+    
+    pybedtools.cleanup()
+    
     regions_to_keep = regions_to_keep[['region_id', 'chrom', 'start', 'end', 'strand', 'subregion', 'region', 'gene']].drop_duplicates()
     new_region_count = len(regions_to_keep)
     print('New region count: {}'.format(new_region_count))
@@ -470,14 +474,14 @@ parser = argparse.ArgumentParser(description='Calculate edit fraction in given r
 parser.add_argument('input_json', type=str)
 parser.add_argument('--outfile_override', type=str, default=None)
 parser.add_argument('--regions_override', type=str, default=None)
-parser.add_argument('--control', type=bool, default=False)
+parser.add_argument('--keep_all', type=bool, default=False)
 parser.add_argument('--final_peaks', type=bool, default=False)
 
 args = parser.parse_args()
 input_json = args.input_json
 regions_override = args.regions_override
 outfile_override = args.outfile_override
-control = args.control
+keep_all = args.keep_all
 final_peaks = args.final_peaks
 
 
@@ -493,8 +497,9 @@ if regions_override:
     print('Regions override provided: {}'.format(regions_override))
     suffix = regions_override.split('_')[-1]
     
-if control:
-    print('Is control')
+if keep_all:
+    print('Keeping all peaks...')
+    final_peaks = True
     
 if final_peaks:
     print("Asessing final merged peaks... will not report background editing values")
@@ -503,7 +508,7 @@ if final_peaks:
 print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 print("Calculating Edit-C Region Baseline")
 print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-output_folder,label, stamp_sites, forward_bw, reverse_bw, fasta, regions, edit_type, bam_path = load_json_info(input_json, regions_override, control=control)
+output_folder,label, stamp_sites, forward_bw, reverse_bw, fasta, regions, edit_type, bam_path = load_json_info(input_json, regions_override)
 
 print('Looking at {}>{} edits'.format(edit_type[0], edit_type[1]))
 
@@ -523,10 +528,10 @@ else:
 print('Outputting to {}'.format(out_file)) 
     
 # Keeping only windows with edits
-if not control:
+if not regions_override:
     filtered_regions = keep_regions_with_edits(stamp_sites, regions)
     filtered_regions.to_csv('{}.filtered_regions.tsv'.format(out_file.split('.tsv')[0]), sep='\t', header=False, index=False)
-elif control:
+elif regions_override:
     # load pre-filtered regions if we are just looking at editing in the control sample but within regions decided from the test sample
     filtered_regions = pd.read_csv(regions_override, sep='\t')
     print("{} regions provided to analyze...".format(len(filtered_regions)))
@@ -534,11 +539,15 @@ elif control:
 if len(filtered_regions) == 0:
     print("No edits to analyze")
     with open(out_file, 'w') as f:
-        f.write('region_id\tchrom\tstart\tend\tedit_c\tstrand\tcoverage\tconversions\toverall_region_id\tchrom_region\tstart_region\tend_region\tedit_c_region\tstrand_region\tcoverage_region\n')
+            f.write('region_id\tchrom\tstart\tend\tedit_c\tstrand\tcoverage\tconversions\toverall_region_id\tchrom_region\tstart_region\tend_region\tedit_c_region\tstrand_region\tcoverage_region\n')
     sys.exit(0)
     
 
 print("Analyzing edit fraction for {} filtered windows...".format(len(filtered_regions)))
+
+include_read_level_info = True
+if keep_all:
+  include_read_level_info = False  
 window_edit_fractions = edit_fraction(output_folder,label, forward_bw, reverse_bw, fasta, filtered_regions, bam_path, edit_type=edit_type, outfile_override=outfile_override, include_read_level_info=True)
 window_edit_fractions['region_id'] = window_edit_fractions.index
 

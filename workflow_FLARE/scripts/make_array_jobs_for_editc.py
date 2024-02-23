@@ -24,15 +24,18 @@ def get_split_regions(regions_directory):
     return split_regions
     
 
-def make_bash_files(sample_id, split_regions, main_directory, scripts_directory, input_json, outer_window):
+def make_bash_files(sample_id, split_regions, main_directory, scripts_directory, input_json, outer_window, keep_all=False):
     # Make the bash array-task files to qsub
     # make output directory for job err and out files
     if not os.path.exists('{}/outs'.format(main_directory)):
         os.makedirs('{}/outs'.format(main_directory))
     if not os.path.exists('{}/bash_scripts/{}'.format(main_directory, sample_id)):
         os.makedirs('{}/bash_scripts/{}'.format(main_directory, sample_id))
-        
-    bash_command =  'python {}/calculate_edit_c_for_regions.py {} --regions_override {}/{}\n'
+
+    if keep_all:
+        bash_command =  'python {}/calculate_edit_c_for_regions.py {} --regions_override {}/{} --keep_all True\n'
+    else:
+        bash_command =  'python {}/calculate_edit_c_for_regions.py {} --regions_override {}/{}\n'
     
     for chunk_id, region_chunk in split_regions.items():
         print('\t\tJob:', chunk_id, 'Tasks:', len(region_chunk))
@@ -53,6 +56,7 @@ parser.add_argument('--regions_directory', type=str)
 parser.add_argument('--main_directory', type=str)
 parser.add_argument('--scripts_directory', type=str)
 parser.add_argument('--outer_window', type=int, default=0)
+parser.add_argument('--keep_all', type=str, default="false")
 
 
 args = parser.parse_args()
@@ -62,7 +66,8 @@ main_directory = args.main_directory
 scripts_directory = args.scripts_directory
 sample_id = args.sample_id
 outer_window = args.outer_window
+keep_all = args.keep_all.lower() == "true"
 
 print("\tPreparing array jobs to determine edit c across regions efficiently...")
 split_regions = get_split_regions(regions_directory)
-make_bash_files(sample_id, split_regions, main_directory, scripts_directory, input_json, outer_window)
+make_bash_files(sample_id, split_regions, main_directory, scripts_directory, input_json, outer_window, keep_all=keep_all)
