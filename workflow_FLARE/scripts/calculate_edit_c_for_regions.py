@@ -217,8 +217,8 @@ def total_conversions_in_window(stamp_sites, chrom, start, end, strand, edit_typ
                  (stamp_sites.chrom_stamp.astype(str) == chrom) &
                  (stamp_sites.strand_stamp == strand)
                 ]
-    print(chrom, start, end, strand, edit_type)
-    print('\t', stamp_sites_in_window.num_edited_stamp.to_list())
+    #print(chrom, start, end, strand, edit_type)
+    #print('\t', stamp_sites_in_window.num_edited_stamp.to_list())
     return stamp_sites_in_window.num_edited_stamp.sum()
 
 
@@ -323,7 +323,7 @@ def load_json_info(input_json_filepath, regions_override=None):
     print("Forward bigwig: {}".format(forward_bw))
     print("Reverse bigwig: {}".format(reverse_bw))
     print("Reference being used: {}".format(fasta))
-    print("Regions being annotated: {}\m".format(regions_for_edit_c))
+    print("Regions being annotated: {}\n".format(regions_for_edit_c))
     print("Edit type?: {}".format(edit_type))
     
     # Load STAMP Sites and regions to probe
@@ -348,10 +348,11 @@ def keep_regions_with_edits(stamp_sites, regions_for_edit_c):
     regions_to_keep = regions_for_edit_c_bed.intersect(stamp_sites_bed, wa=True, wb=True, s=True).to_dataframe(names=['chrom', 'start', 'end', 'region_id', 'subregion', 'strand', 'region', 'gene', 'chrom_stamp', 'start_stamp', 'end_stamp', 'strand_stamp', 'strand_stamp1', 'strand_stamp2'])
     
     pybedtools.cleanup()
-    
-    regions_to_keep = regions_to_keep[['region_id', 'chrom', 'start', 'end', 'strand', 'subregion', 'region', 'gene']].drop_duplicates()
+
     new_region_count = len(regions_to_keep)
     print('New region count: {}'.format(new_region_count))
+
+    regions_to_keep = regions_to_keep[['region_id', 'chrom', 'start', 'end', 'strand', 'subregion', 'region', 'gene']].drop_duplicates()
 
     return regions_to_keep
 
