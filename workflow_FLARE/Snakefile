@@ -136,10 +136,10 @@ rule run_editc_array_job:
         editc_outputs=os.path.join(config["output_folder"], "editc_outputs", config["label"], config["label"] + "_edit_c_for_all_regions_{part}_all_info.tsv"),
         filtered_region_outputs=os.path.join(config["output_folder"], "editc_outputs", config["label"], config["label"] + "_edit_c_for_all_regions_{part}_all_info.filtered_regions.tsv")
     params:
-        threads=8,
+        threads=16,
         directory=config["output_folder"],
         sample_name=config["label"],
-        run_time="04:00:00"
+        run_time="10:00:00"
     singularity:
         "docker://ekofman/editc:v2"
     shell:

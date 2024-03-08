@@ -207,7 +207,7 @@ def get_num_edited_reads_and_coverage(chrom, start, end, edited_origin, edited_d
         
     num_edited_reads = len(list(read_edits.keys()))
     
-    print('>>>>>', chrom, start, end, target_bases, pos_edits)
+    #print('>>>>>', chrom, start, end, target_bases, pos_edits)
     return num_edited_reads, np.mean(coverages), total_reads_in_region, len(substrate_bases)
 
 
@@ -235,9 +235,13 @@ def get_edit_c_info(t):
     total_conversions = total_conversions_in_window(stamp_sites, chrom, start, end, strand, edit_type)
     total_target_bases = sum_all_c_coverage_in_window(chrom, start, end, strand, d, edit_type)
 
+    if total_target_bases == 0:
+        fraction_bases_edited = 0
+    else:
+        fraction_bases_edited = total_conversions/total_target_bases
+       
+            
     if not include_read_level_info:
-
-        
         edit_fraction_info[region_label] = {
                          'start': start,
                          'end': end,
@@ -245,7 +249,7 @@ def get_edit_c_info(t):
                          'strand': strand,
                          'target_bases': total_target_bases,
                          'edited_bases': total_conversions,
-                         'edit_fraction': total_conversions/total_target_bases
+                         'edit_fraction': fraction_bases_edited
                         }
             
     else:
@@ -256,7 +260,7 @@ def get_edit_c_info(t):
             fraction_reads_edited = num_edited_reads/total_reads_in_region
         except Exception as e:
             fraction_reads_edited = None
-            
+
         edit_fraction_info[region_label] = {
                                  'start': start,
                                  'end': end,
@@ -264,7 +268,7 @@ def get_edit_c_info(t):
                                  'strand': strand,
                                  'target_bases': total_target_bases,
                                  'edited_bases': total_conversions,
-                                 'edit_fraction': total_conversions/total_target_bases,
+                                 'edit_fraction': fraction_bases_edited,
                                  'num_edited_reads': num_edited_reads,
                                  'total_reads_in_region': total_reads_in_region,
                                  'fraction_reads_edited': fraction_reads_edited,
@@ -358,7 +362,7 @@ def print_time():
     print (now.strftime("%Y-%m-%d %H:%M:%S"))
 
     
-def edit_fraction(output_folder, label, forward_bw, reverse_bw, fasta, filtered_regions, bam_path, edit_type, include_read_level_info=False, outfile_override=False):    
+def edit_fraction(output_folder, label, forward_bw, reverse_bw, fasta, filtered_regions, bam_path, edit_type, include_read_level_info=False, outfile_override=False, cores=32):    
     region_ids = list(filtered_regions.region_id)
     chroms = list(filtered_regions.chrom)
     starts = list(filtered_regions.start)
@@ -376,7 +380,7 @@ def edit_fraction(output_folder, label, forward_bw, reverse_bw, fasta, filtered_
         print("\nIncluding read level information")
     else:
         print("Not including read level information")
-    num_processes = 16
+    num_processes = cores
 
     p = Pool(num_processes)
     region_level_edit_c_dfs = p.map(get_edit_c_info, zip(region_ids, chroms, starts, ends, strands, edit_type_list, bam_path_list, reference_path_list, include_read_level_info_list))
@@ -476,6 +480,7 @@ parser.add_argument('--outfile_override', type=str, default=None)
 parser.add_argument('--regions_override', type=str, default=None)
 parser.add_argument('--keep_all', type=bool, default=False)
 parser.add_argument('--final_peaks', type=bool, default=False)
+parser.add_argument('--cores', type=int, default=32)
 
 args = parser.parse_args()
 input_json = args.input_json
@@ -483,14 +488,14 @@ regions_override = args.regions_override
 outfile_override = args.outfile_override
 keep_all = args.keep_all
 final_peaks = args.final_peaks
-
+cores = args.cores
 
 now = datetime.datetime.now()
 print ("Current date and time : ")
 print (now.strftime("%Y-%m-%d %H:%M:%S"))
     
 print('input is {}'.format(input_json))
-
+print('cores: {}'.format(cores))
 
 suffix = ''
 if regions_override:
@@ -526,12 +531,12 @@ else:
     out_file = '{}/{}_edit_c_for_all_regions_{}_all_info.tsv'.format(out_dir, label, suffix)
 
 print('Outputting to {}'.format(out_file)) 
-    
+
 # Keeping only windows with edits
-if not regions_override:
+if not keep_all:
     filtered_regions = keep_regions_with_edits(stamp_sites, regions)
     filtered_regions.to_csv('{}.filtered_regions.tsv'.format(out_file.split('.tsv')[0]), sep='\t', header=False, index=False)
-elif regions_override:
+elif keep_all:
     # load pre-filtered regions if we are just looking at editing in the control sample but within regions decided from the test sample
     filtered_regions = pd.read_csv(regions_override, sep='\t')
     print("{} regions provided to analyze...".format(len(filtered_regions)))
@@ -548,7 +553,7 @@ print("Analyzing edit fraction for {} filtered windows...".format(len(filtered_r
 include_read_level_info = True
 if keep_all:
   include_read_level_info = False  
-window_edit_fractions = edit_fraction(output_folder,label, forward_bw, reverse_bw, fasta, filtered_regions, bam_path, edit_type=edit_type, outfile_override=outfile_override, include_read_level_info=True)
+window_edit_fractions = edit_fraction(output_folder,label, forward_bw, reverse_bw, fasta, filtered_regions, bam_path, edit_type=edit_type, outfile_override=outfile_override, include_read_level_info=True, cores=cores)
 window_edit_fractions['region_id'] = window_edit_fractions.index
 
 if not final_peaks:
@@ -566,7 +571,7 @@ if not final_peaks:
 
     collapsed_subregions = get_collapsed_subregions(gene_and_region_span)
     print("Analyzing edit fraction for {} collapsed subregions (ie introns and exons)...".format(len(collapsed_subregions)))
-    subregion_edit_fractions = edit_fraction(output_folder,label, forward_bw, reverse_bw, fasta, collapsed_subregions, bam_path, edit_type=edit_type, outfile_override=outfile_override)
+    subregion_edit_fractions = edit_fraction(output_folder,label, forward_bw, reverse_bw, fasta, collapsed_subregions, bam_path, edit_type=edit_type, outfile_override=outfile_override, cores=cores)
     region_counts, subregion_counts = get_dicts_for_region_and_subregion_data(subregion_edit_fractions)
     
     window_edit_fractions['subregion_coverage'],\
