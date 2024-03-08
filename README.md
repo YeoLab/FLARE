@@ -188,7 +188,7 @@ If you are identifying clusters for many samples, it will be too time consuming 
 * Then, call the script using the following parameters:
 
     `
-    python make_FLARE_jsons.py <path_to_sailor_output_folder> <path_to_new_folder_where_jsons_will_be_placed> <path_to_new_folder_where_FLARE_outputs_will_be_placed> <path_to_regions_folder> <path_to_fasta_used_for_alignment> <edit_type (i.e. CT or AG)> <fdr_threshold (default 0.1)>
+    python make_FLARE_jsons.py <path_to_sailor_output_folder> <path_to_new_folder_where_jsons_will_be_placed> <path_to_new_folder_where_FLARE_outputs_will_be_placed> <path_to_fasta_used_for_alignment> <edit_type (i.e. CT or AG)> <fdr_threshold (default 0.1)> <--cluster_identification_regions_folder CLUSTER_IDENTIFICATION_REGIONS_FOLDER OR --edit_fraction_regions_file EDIT_FRACTION_REGIONS_FILE>
     `
 
 Once this completes, you will have one .json file for each sample successfully processed by SAILOR.
