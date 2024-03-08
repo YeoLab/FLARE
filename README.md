@@ -147,9 +147,10 @@ All FLARE configuration information must be saved in a .json file with the follo
     "keep_all": false
 }
 ```
-Note that this specifies parameters for FLARE for only *one* sample. Four of the inputs to the FLARE pipeline are SAILOR outputs for this sample,
+****Note**** This specifies parameters for FLARE for only *one* sample. Four of the inputs to the FLARE pipeline are SAILOR outputs for this sample,
 and of those, three are specifically contained in the 8_bw_and_bam folder from that SAILOR run. Other than that, you must specify the edit type (should be the same as whatever was specified for the SAILOR run), a label for your sample, the overall output folder where you want the FLARE folder for this sample to be generated, and the fasta that was used to align the genome (same sample as was used for the SAILOR run). 
 
+****Note****: *keep_all* should be false, and a regions *directory* must be specified
 
 #### Edit Fraction Mode
 ```
@@ -166,6 +167,7 @@ and of those, three are specifically contained in the 8_bw_and_bam folder from t
     "keep_all": true 
 }
 ```
+****Note****: *keep_all* should be true, and a regions *file* must be specified
 
 The regions file used for Edit Fraction Mode is not a typical bed file. It should be tab-separated and the same column headers as in the following example:
 ```
