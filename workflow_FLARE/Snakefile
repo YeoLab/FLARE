@@ -47,6 +47,8 @@ if keep_all:
     num_regions = len(regions_df)
     chunk_size = 7000
     total_chunks = math.ceil(num_regions/chunk_size)
+    regions_file = config["regions_file"]
+    
 
     split_regions_chunks = expand(os.path.join(config["output_folder"], "split_regions", "regions_{i}"), 
         i=range(total_chunks))
@@ -58,9 +60,12 @@ else:
     # Normal edit c calculation
     overall_output = [final_bedgraph, merged_filtered_region_outputs, scored_peaks]
     regions = config["regions"]  
+    regions_file = ''
+
     editc_regions_input.append(regions)
-    region_files = glob('{}/*'.format(regions))
-    region_suffixes = [r.split('_')[-1] for r in region_files if '.sh' not in r]
+    split_regions_chunks = glob('{}/*'.format(regions))
+    print('split_regions_chunks: {}'.format(len(split_regions_chunks)))
+    region_suffixes = [r.split('_')[-1] for r in split_regions_chunks if '.sh' not in r]
 
     filtered_region_outputs = [os.path.join(config["output_folder"], "editc_outputs", config["label"], config["label"] + "_edit_c_for_all_regions_{part}_all_info.filtered_regions.tsv")]
     
@@ -123,7 +128,7 @@ rule all:
 
 rule split_regions:
     input:
-        regions=config["regions_file"]
+        regions=regions_file
     output:
         split_regions_chunks
     params:
