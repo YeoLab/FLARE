@@ -1,4 +1,4 @@
-F![FLARE](FLARE_logo.png "FLARE")
+![FLARE](FLARE_logo.png "FLARE")
 
 ### FLagging Areas of RNA-editing Enrichment (FLARE) 
 
@@ -107,9 +107,18 @@ subsampled.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.be
 
 # Running the FLARE (cluster identification) snakemake pipeline
 
+FLARE can be run in two modes:
+* Cluster Identification Mode: 
+    * * Determines edit cluster locations along with a confidence score for prioritizing and filtering clusters
+* Edit Fraction Mode:
+    * * Calculates edit fractions within predetermined genomic regions
+
+To give a scenario where you might find the second mode of use, let's say you are comparing editing between two samples, A and B, expected to have different levels of editing, or different edited locations. You would first use the Cluster Identification Mode to find the edit clusters in A and B. Then, after inspecting the resulting clusters and possibly filtering them, you can make a merged regions file containing the union of edited regions found in A and B. Then, you'd run FLARE again for each sample, but this time in Edit Fraction mode, providing this merged regions file as a parameter. This would generate, for each sample, an output file containing the edit fraction at each of the regions in the merged regions. Downstream analyses can then be implemented to assess statistical significance of differential editing at the same loci across samples or conditions.
+
+
 ## Before you start:
 
-To run the FLARE pipeline, you will first need a file specifying the regions in which cluster identification will occur. To generate this file, use the script in workflow_FLARE/scripts called generate_regions.py
+To run the FLARE pipeline, you will first need a set of files specifying the genomic regions in which cluster identification will occur. To generate these files, use the script in workflow_FLARE/scripts called generate_regions.py
 
 Copy this script to wherever you'd like to generate the helper files, which will be take up about 8-10 GB of space. Then run the script by typing   `generate_regions.py <full/path/to/your/genome/gtf/file> <genome_name>_regions`
 
@@ -122,6 +131,8 @@ Once the script finishes running, you will see a new folder called mm10_regions,
 
 ## Parameters
 All FLARE configuration information must be saved in a .json file with the following contents:
+
+#### Cluster Identification Mode
 ```
 {
     "label": "label_for_this_sample",
@@ -130,14 +141,42 @@ All FLARE configuration information must be saved in a .json file with the follo
     "forward_bw": "/absolute/path/to/sailor/output/8_bw_and_bam/this_sample.sortedByCoord.out.bam.fwd.sorted.bw",
     "reverse_bw": "/absolute/path/to/sailor/output/8_bw_and_bam/this_sample.sortedByCoord.out.bam.rev.sorted.bw",
     "fasta": "/path/to/fasta/used/to/align/genome.fa",
-    "regions": "/absolute/path/to/regions/folder",
+    "regions": "/absolute/path/to/regions/folder",  # Generated using the script described above
     "edit_type": "CT", (or "AG", "TC", etc.-- should be same as what was used in SAILOR run)
     "bam": "/absolute/path/to/sailor/output/8_bw_and_bam/this_sample.sortedByCoord.out.bam_filtered_merged.sorted.bam"
+    "keep_all": false
+}
+```
+Note that this specifies parameters for FLARE for only *one* sample. Four of the inputs to the FLARE pipeline are SAILOR outputs for this sample,
+and of those, three are specifically contained in the 8_bw_and_bam folder from that SAILOR run. Other than that, you must specify the edit type (should be the same as whatever was specified for the SAILOR run), a label for your sample, the overall output folder where you want the FLARE folder for this sample to be generated, and the fasta that was used to align the genome (same sample as was used for the SAILOR run). 
+
+
+#### Edit Fraction Mode
+```
+{
+    "label": "label_for_this_sample",
+    "output_folder": "/absolute/path/to/folder/outputs_where_all_samples_will_be_placed/FLARE_outputs/",
+    "stamp_sites_file": "/absolute/path/to/sailor/output/this_sample.bam.combined.readfiltered.formatted.varfiltered.snpfiltered.ranked.bed",
+    "forward_bw": "/absolute/path/to/sailor/output/8_bw_and_bam/this_sample.sortedByCoord.out.bam.fwd.sorted.bw",
+    "reverse_bw": "/absolute/path/to/sailor/output/8_bw_and_bam/this_sample.sortedByCoord.out.bam.rev.sorted.bw",
+    "fasta": "/path/to/fasta/used/to/align/genome.fa",
+    "regions_file": "/absolute/path/to/regions/file",  # See note below about formatting for the regions file
+    "edit_type": "CT", (or "AG", "TC", etc.-- should be same as what was used in SAILOR run)
+    "bam": "/absolute/path/to/sailor/output/8_bw_and_bam/this_sample.sortedByCoord.out.bam_filtered_merged.sorted.bam"
+    "keep_all": true 
 }
 ```
 
-Note that this specifies parameters for FLARE for only *one* sample. Four of the inputs to the FLARE pipeline are SAILOR outputs for this sample,
-and of those, three are specifically contained in the 8_bw_and_bam folder from that SAILOR run. Other than that, you must specify the edit type (should be the same as whatever was specified for the SAILOR run), a label for your sample, the overall output folder where you want the FLARE folder for this sample to be generated, and the fasta that was used to align the genome (same sample as was used for the SAILOR run). 
+The regions file used for Edit Fraction Mode is not a typical bed file. It should be tab-separated and the same column headers as in the following example:
+```
+region_id       chrom   start   end     strand
+A               1       783678  783708  +
+B               1       783753  783843  +
+C               1       784475  784520  +
+D               1       804189  804222  +
+E               1       826656  826686  -
+F               1       996371  996416  -
+```
 
 ### Use the make_FLARE_jsons.py to set up configuration .json files for multiple samples
 If you are identifying clusters for many samples, it will be too time consuming to manually create .json files for each sample. Instead, use the provided make_FLARE_jsons.py script, which can be found in workflow_FLARE/scripts, to generate all .json files simultaneously.
