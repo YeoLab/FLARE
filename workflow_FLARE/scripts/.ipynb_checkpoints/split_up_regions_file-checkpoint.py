@@ -19,13 +19,16 @@ list_df = [df[i:i+chunk_size] for i in range(0,df.shape[0],chunk_size)]
 
 sys.stdout.write('{} being split into {} chunks of size {} in {}\n'.format(regions_filepath, len(list_df), chunk_size, split_regions_folder))
 
-basename = os.path.basename(regions_filepath)
+basename = os.path.basename(regions_filepath).split('.')[0]
 
 if not os.path.isdir(split_regions_folder):
     os.mkdir(split_regions_folder)
     
 for i,chunk in enumerate(list_df):
-    chunk.to_csv('{}/{}_{}'.format(split_regions_folder, basename, i), sep='\t', index=False)
+    filename_for_chunk = '{}/{}_{}'.format(split_regions_folder, basename, i)
+    print("Chunk #{} with destination of {}".format(i, filename_for_chunk))
+
+    chunk.to_csv(filename_for_chunk, sep='\t', index=False)
 
     
     

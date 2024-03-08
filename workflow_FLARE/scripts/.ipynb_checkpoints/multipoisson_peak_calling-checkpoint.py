@@ -41,8 +41,35 @@ def apply_exon_edit_c_pvalue_to_site(r):
 def poisson_filter(edit_c_df):
     region_sites = edit_c_df.copy()
 
+    print("Total sites: {}".format(len(region_sites)))
+    
     prefix = 'subregion_'
-    region_sites['{}fraction'.format(prefix)] = (region_sites['{}conversions'.format(prefix)]-region_sites['edited_bases'])/(region_sites['{}coverage'.format(prefix)] - region_sites['target_bases'])
+    fraction_column = '{}fraction'.format(prefix)
+    conversions_column = '{}conversions'.format(prefix)
+    coverage_column = '{}coverage'.format(prefix)
+
+    print("\nColumns: ", fraction_column, conversions_column, coverage_column)
+
+    numerator = region_sites[conversions_column] - region_sites['edited_bases']
+    denominator = region_sites[coverage_column] - region_sites['target_bases']
+
+    #print("\nNumerator: {}".format(numerator.head()))
+    #print("\nDenominator: {}".format(denominator.head()))
+    
+    region_sites[fraction_column] = (numerator)/(denominator)
+
+    print("\n\nExample calculated fractions...")
+    print(region_sites[[conversions_column, coverage_column, fraction_column, 'mean_depth']].head(5))
+
+    # Are any infinite?
+    print("\n\nCoverage col:")
+    print(region_sites[coverage_column].head(5))
+    region_sites_with_zero_coverage = region_sites[region_sites[coverage_column] == 0]
+    print("\n\n\t\tSites with zero coverage: {}".format(len(region_sites_with_zero_coverage)))
+    #print("\t\t\t\tExamples: {}".format(region_sites_with_zero_coverage[[conversions_column, coverage_column, fraction_column, 'mean_depth']].head(5)))
+    print("\t\t\tRemoving those...")
+    region_sites = region_sites[region_sites[coverage_column] > 0]
+    
     region_sites = region_sites.fillna(0)
     
     depth_windows = [0, 10, 20, 30, 40, 50, 1000000]
@@ -51,7 +78,7 @@ def poisson_filter(edit_c_df):
         if i < len(depth_windows) -1:
             print(i,  depth_windows[i],  depth_windows[i+1])
             mean_fraction_by_depth_windows[i] = region_sites[(region_sites.mean_depth < depth_windows[i+1])].subregion_fraction.mean()
-    print('Mean fraction by depth:\n', '\t', mean_fraction_by_depth_windows)
+    print('\nMean fraction by depth:\n', '\t', mean_fraction_by_depth_windows)
     
     region_sites['background_rate'] = region_sites.mean_depth.apply(get_window_from_depth, args=(depth_windows, mean_fraction_by_depth_windows,))
     
