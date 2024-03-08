@@ -22,15 +22,33 @@ def validate_paths(paths, verbose=False):
             sys.exit(1)
     
 
-def create_jsons(sailor_output_folder, peakcalling_input_folder, peakcalling_output_folder, fasta, peakcalling_regions_folder, edit_type, fdr_filter):        
+def create_jsons(sailor_output_folder, peakcalling_input_folder, peakcalling_output_folder, fasta, edit_type, fdr_filter,
+                 cluster_identification_regions_folder=None,
+                 edit_fraction_regions_file=None
+                ):        
     validate_paths([sailor_output_folder, peakcalling_input_folder, peakcalling_output_folder, peakcalling_regions_folder, fasta], verbose=True)
+
+    if not (cluster_identification_regions_folder or edit_fraction_regions_file):
+        sys.stdout.write("Either a regions folder (Cluster Identification Mode) or regions file (Edit Fraction Mode) must be provided!")
+        sys.exit(1)
+    if (cluster_identification_regions_folder and edit_fraction_regions_file):
+        sys.stdout.write("Found both regions folder (Cluster Identification Mode) and regions file (Edit Fraction Mode)! Only provide one.")
+        sys.exit(1)
+        
+    if edit_fraction_regions_file:
+        sys.stdout.write("Edit Fraction Mode using {}".format(edit_fraction_regions_file))
+        keep_all = True
+    else:
+        sys.stdout.write("Cluster Identification Moe using {}".format(cluster_identification_regions_folder))
+        keep_all = False
+    
     stamp_site_files = glob('{}/*bed'.format(sailor_output_folder))
     sys.stdout.write('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
     sys.stdout.write("Found {} finished SAILOR outputs in {}...\n".format(len(stamp_site_files), sailor_output_folder))
     for s in stamp_site_files:
         sys.stdout.write('\t{}\n'.format(s))
     sys.stdout.write('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n')
-    sys.stdout.write('Writing JSON inputs for peakcaller for each SAILOR output...\n')
+    sys.stdout.write('Writing JSON inputs for FLARE for each SAILOR output...\n')
     input_json_dicts = []
     for stamp_site_file in stamp_site_files:
         sample_id = stamp_site_file.split('.combined')[0].split('/')[-1]
@@ -49,14 +67,20 @@ def create_jsons(sailor_output_folder, peakcalling_input_folder, peakcalling_out
             "forward_bw": forward_bw,
             "reverse_bw": reverse_bw,
             "fasta": fasta,
-            "regions": peakcalling_regions_folder,
             "edit_type": edit_type,
             "bam": bam,
-            "fdr_threshold": fdr_filter
+            "fdr_threshold": fdr_filter,
+            "keep_all": keep_all
         }
 
-        json_filename = '{}/{}_peakcalling_input.json'.format(peakcalling_input_folder, sample_id)
+        if cluster_identification_regions_folder:
+            input_json_dict['regions'] = cluster_identification_regions_folder
+            json_filename = '{}/{}_cluster_identification_input.json'.format(peakcalling_input_folder, sample_id)
 
+        elif edit_fraction_regions_file:
+            input_json_dict['regions_file'] = edit_fraction_regions_file
+            json_filename = '{}/{}_edit_fraction_input.json'.format(peakcalling_input_folder, sample_id)
+        
         sys.stdout.write("\tWriting {}...\n".format(json_filename))
         with open(json_filename, 'w') as f:
             f.write(json.dumps(input_json_dict))
@@ -68,10 +92,12 @@ if __name__ == '__main__':
     parser.add_argument('sailor_output_folder', type=str)
     parser.add_argument('peakcalling_input_folder', type=str)
     parser.add_argument('peakcalling_output_folder', type=str)
-    parser.add_argument('peakcalling_regions_folder', type=str)
     parser.add_argument('fasta', type=str)
     parser.add_argument('edit_type', type=str)
     parser.add_argument('fdr_filter', type=float, default=0.1)
+    
+    parser.add_argument('--cluster_identification_regions_folder', type=str, default=None)
+    parser.add_argument('--edit_fraction_regions_file', type=str, default=None)
 
 
     args = parser.parse_args()
@@ -79,8 +105,13 @@ if __name__ == '__main__':
     peakcalling_input_folder = args.peakcalling_input_folder
     peakcalling_output_folder = args.peakcalling_output_folder
     fasta = args.fasta
-    peakcalling_regions_folder = args.peakcalling_regions_folder
+    cluster_identification_regions_folder = args.peakcalling_regions_folder
+    edit_fraction_regions_file = args.peakcalling_regions_folder
+
     edit_type = args.edit_type
     fdr_filter = args.fdr_filter 
     
-    create_jsons(sailor_output_folder, peakcalling_input_folder, peakcalling_output_folder, fasta, peakcalling_regions_folder, edit_type, fdr_filter)
+    create_jsons(sailor_output_folder, peakcalling_input_folder, peakcalling_output_folder, fasta, edit_type, fdr_filter,
+                 cluster_identification_regions_folder=cluster_identification_regions_folder,
+                 edit_fraction_regions_file=edit_fraction_regions_file
+                )
