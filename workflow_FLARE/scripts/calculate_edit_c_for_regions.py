@@ -569,7 +569,6 @@ if len(filtered_regions) == 0:
 
 print("Analyzing edit fraction for {} filtered windows...".format(len(filtered_regions)))
 
-#include_read_level_info = False# True <-- read level info is failing for MARINE outputs, removing for now
 include_read_level_info = True
 if keep_all:
   include_read_level_info = False  
