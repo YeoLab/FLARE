@@ -26,6 +26,16 @@ import os
 # DDX11L1:exon_0:11974-12004      chr1    11974   12004   +       exon_0  exon    DDX11L1
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+if 'max_merge_dist' not in config:
+    config['max_merge_dist'] = 15
+
+if 'fdr_threshold' not in config:
+    config['fdr_threshold'] = 0.1
+    
+    
+print("Max merge distance: {}".format(config['max_merge_dist']))
+print("FDR filtering threshold: {}".format(config['fdr_threshold']))
+
 overall_output = []
 
 final_bedgraph = os.path.join(config["output_folder"], "bedgraphs", config["label"] + "_editc.bedgraph")
@@ -47,11 +57,13 @@ if keep_all:
     num_regions = len(regions_df)
     chunk_size = 7000
     total_chunks = math.ceil(num_regions/chunk_size)
+    print("Num regions: {}, chunk_size: {}, total_chunks: {}".format(num_regions, chunk_size, total_chunks))
     regions_file = config["regions_file"]
     
 
-    split_regions_chunks = expand(os.path.join(config["output_folder"], "split_regions", "regions_{i}"), 
-        i=range(total_chunks))
+    regions_base_name = regions_file.split('/')[-1].split('.')[0]
+    print('regions_base_name is {}'.format(regions_base_name))
+    split_regions_chunks = expand(os.path.join(config["output_folder"], "split_regions", regions_base_name + "_{i}"), i=range(total_chunks))
     split_regions_folder = os.path.join(config["output_folder"], "split_regions")
     editc_regions_input.append(split_regions_folder)
     region_suffixes = range(total_chunks)
@@ -110,15 +122,6 @@ config_path = get_val_from_args(["configfile", "configfiles"], absolute=True)
     
 print("Config path is {}".format(config_path))
 
-if 'max_merge_dist' not in config:
-    config['max_merge_dist'] = 15
-
-if 'fdr_threshold' not in config:
-    config['fdr_threshold'] = 0.1
-    
-    
-print("Max merge distance: {}".format(config['max_merge_dist']))
-print("FDR filtering threshold: {}".format(config['fdr_threshold']))
 
 rule all:
     input:

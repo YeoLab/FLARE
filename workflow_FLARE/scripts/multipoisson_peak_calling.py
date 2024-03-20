@@ -69,7 +69,8 @@ def poisson_filter(edit_c_df):
     #print("\t\t\t\tExamples: {}".format(region_sites_with_zero_coverage[[conversions_column, coverage_column, fraction_column, 'mean_depth']].head(5)))
     print("\t\t\tRemoving those...")
     region_sites = region_sites[region_sites[coverage_column] > 0]
-    
+
+    region_sites.replace([np.inf, -np.inf], np.nan, inplace=True)
     region_sites = region_sites.fillna(0)
     
     depth_windows = [0, 10, 20, 30, 40, 50, 1000000]
