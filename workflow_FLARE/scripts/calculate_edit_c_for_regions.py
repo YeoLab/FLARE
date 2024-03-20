@@ -116,24 +116,18 @@ def get_c_positions_and_coverage_in_window(chrom, start, end, strand, rdd, edit_
         print("Strand error: {}".format(strand))
         sys.exit(1)
 
-    # TO REMOVE
-    # print('REMOVE: looking for {}, sequence: {}'.format(looking_for, sequence))
-    #print(sequence)
     if len(sequence) > 0:
         matches = re.finditer(looking_for, sequence.upper())
     else:
         print('Failed on {} {} {} {}'.format(chrom, start, end, strand))
         return d
 
-    # print("REMOVE matches: {}".format(matches))
     
     relpos = [match.start() for match in matches]
     abspos = ["{}:{}".format(chrom, start + p) for p in relpos]
     coverage = rdd.values(chrom=chrom, start=start, end=end, strand=strand, reverse=reverse)
     coverage = [np.abs(c) for c in coverage]  
 
-    # TO REMOVE
-    #print("REMOVE: coverage: {}".format(coverage))
     c_coverage = [coverage[p] for p in relpos]
     for p, c in zip(abspos, c_coverage):
         d[p] = c
@@ -143,8 +137,6 @@ def sum_all_c_coverage_in_window(chrom, start, stop, strand, rdd, edit_type, rev
     all_coverage = 0
     c_positions = get_c_positions_and_coverage_in_window(chrom, start, stop, strand, rdd, edit_type, reverse=reverse)
 
-    # REMOVE
-    #print("REMOVE c_positions: {}".format(c_positions))
     for pos, cov in c_positions.items():
         all_coverage += cov
     return int(all_coverage)
@@ -184,13 +176,6 @@ def get_num_edited_reads_and_coverage(chrom, start, end, edited_origin, edited_d
     set_of_edit_sites = set(stamp_sites[stamp_sites.chrom_stamp.astype(str) == chrom].start_stamp)
     target_bases = set(substrate_bases).intersection(set_of_edit_sites)
 
-    # REMOVE
-    #print("REMOVE start: {}".format(start))
-    #print('REMOVE edited origin', edited_origin)
-    #print('REMOVE reference:', reference.upper())
-    #print('REMOVE substrate bases:', substrate_bases)
-    #print('REMOVE set of edit sites:', [s for s in set_of_edit_sites if s >= start and s <= end])
-    #print('REMOVE target bases:', target_bases)
     
     read_edits = defaultdict(lambda: defaultdict(lambda:[]))
     #print(target_bases, edited_origin, edited_destination)
@@ -223,9 +208,7 @@ def get_num_edited_reads_and_coverage(chrom, start, end, edited_origin, edited_d
                         
                         ref_start = pileupread.alignment.reference_start
                         ref_end = pileupread.alignment.reference_end
-                        
-                        #print("REMOVE", "position: {}, read base: {}".format(adjusted_pileup_pos, read_base))
-                        #print("REMOVE", "edited_destination: {}".format(edited_destination))
+                    
 
                         if read_base == edited_destination:
                             read_edits[read_name]['bases'].append(read_base)
@@ -267,8 +250,6 @@ def get_edit_c_info(t):
     total_conversions = total_conversions_in_window(stamp_sites, chrom, start, end, strand, edit_type)
     total_target_bases = sum_all_c_coverage_in_window(chrom, start, end, strand, d, edit_type, reverse=reverse)
 
-    # TO REMOVE
-    #print("REMOVE: total_target_bases: {}".format(total_target_bases))
     if total_target_bases == 0:
         fraction_bases_edited = 0
     else:
@@ -388,8 +369,6 @@ def keep_regions_with_edits(stamp_sites, regions_for_edit_c):
     new_region_count = len(regions_to_keep)
     print('New region count: {}'.format(new_region_count))
 
-    # TO REMOVE
-    #print("REMOVE stamp: {}".format(regions_to_keep[['chrom_stamp', 'start_stamp', 'end_stamp', 'strand_stamp', 'strand_stamp1', 'strand_stamp2']]))
     regions_to_keep = regions_to_keep[['region_id', 'chrom', 'start', 'end', 'strand', 'subregion', 'region', 'gene']].drop_duplicates()
 
     return regions_to_keep
