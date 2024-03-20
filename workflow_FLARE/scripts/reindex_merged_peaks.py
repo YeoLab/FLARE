@@ -15,7 +15,8 @@ peaks_filtered_by_fdr_reindexed_output_file = args.peaks_filtered_by_fdr_reindex
 
 df = pd.read_csv(peaks_filtered_by_fdr_input_file, sep='\t', 
             names=['chrom', 'start', 'end', 'mean_depth', 'region_adj_p', 'strand', 'overall_region_id'])
-
+print('Length of peaks_filtered_by_fdr_input_file: {}'.format(len(df)))
+print('\t Head of peaks_filtered_by_fdr_input_file: {}'.format(df.head(5)))
             
 def reindex(r):
     return '{}:{}-{}({})|{}'.format(r.chrom, r.start, r.end, r.strand, r.overall_region_id)
