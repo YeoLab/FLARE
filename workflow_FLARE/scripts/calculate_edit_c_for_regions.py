@@ -187,9 +187,11 @@ def get_num_edited_reads_and_coverage(chrom, start, end, edited_origin, edited_d
 
     substrate_bases = [i.start()+start for i in re.finditer(edited_origin, reference.upper())]
 
-    set_of_edit_sites = set(stamp_sites[stamp_sites.chrom_stamp.astype(str) == chrom].start_stamp)
-    target_bases = set(substrate_bases).intersection(set_of_edit_sites)
-
+    # This is just a heuristic, so for now account for off-by-one errors by using both start and end stamp location
+    # to check for edited reads.
+    set_of_edit_start_sites = set(stamp_sites[stamp_sites.chrom_stamp.astype(str) == chrom].start_stamp)
+    set_of_edit_end_sites = set(stamp_sites[stamp_sites.chrom_stamp.astype(str) == chrom].end_stamp)
+    target_bases = set(substrate_bases).intersection(set_of_edit_start_sites.union(set_of_edit_end_sites))
     
     read_edits = defaultdict(lambda: defaultdict(lambda:[]))
     #print(target_bases, edited_origin, edited_destination)
