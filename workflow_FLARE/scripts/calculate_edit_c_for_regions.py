@@ -145,7 +145,7 @@ def get_c_positions_and_coverage_in_window(chrom, start, end, strand, rdd, edit_
     return d
 
 def sum_all_c_coverage_in_window(chrom, start, stop, strand, rdd, edit_type, reverse=False,
-                                 count_coverage_on_both_strands=False)
+                                 count_coverage_on_both_strands=False
                                 ):
     all_coverage = 0
     c_positions = get_c_positions_and_coverage_in_window(chrom, start, stop, strand, rdd, edit_type, 
