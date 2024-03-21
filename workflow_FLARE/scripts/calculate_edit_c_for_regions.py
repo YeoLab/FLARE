@@ -48,7 +48,9 @@ class ReadDensity:
             print("couldn't open the bigwig files!")
             print(e)
 
-    def values(self, chrom, start, end, strand, reverse=False):
+    def values(self, chrom, start, end, strand, reverse=False,
+               count_coverage_on_both_strands=False
+              ):
         """
         Parameters
         ----------
@@ -73,7 +75,14 @@ class ReadDensity:
                 strand = '+'
         
         try:
-            if strand == "+":
+            if count_coverage_on_both_strands:
+                pos = list(pd.Series(self.pos.values(chrom, start, end)).fillna(0))
+                neg = list(pd.Series(self.neg.values(chrom, start, end)).fillna(0))
+                combined = []
+                for p,n in zip(pos, neg):
+                    combined.append(p+n)
+                return combined
+            elif strand == "+":
                 return list(pd.Series(self.pos.values(chrom, start, end)).fillna(0))
             elif strand == "-":
                 return list(pd.Series(self.neg.values(chrom, start, end)).fillna(0))
@@ -88,7 +97,8 @@ class ReadDensity:
 def find(s, ch):
     return [i for i, ltr in enumerate(s) if ltr == ch]
 
-def get_c_positions_and_coverage_in_window(chrom, start, end, strand, rdd, edit_type, reverse=False):
+def get_c_positions_and_coverage_in_window(chrom, start, end, strand, rdd, edit_type, 
+                                           reverse=False, count_coverage_on_both_strands=False):
     """
     Given region specified by chrom start end and strand, 
     return the positions (0-based) of target bases (or complement of target bases on neg strand).
@@ -125,7 +135,8 @@ def get_c_positions_and_coverage_in_window(chrom, start, end, strand, rdd, edit_
     
     relpos = [match.start() for match in matches]
     abspos = ["{}:{}".format(chrom, start + p) for p in relpos]
-    coverage = rdd.values(chrom=chrom, start=start, end=end, strand=strand, reverse=reverse)
+    coverage = rdd.values(chrom=chrom, start=start, end=end, strand=strand, 
+                          reverse=reverse, count_coverage_on_both_strands=count_coverage_on_both_strands)
     coverage = [np.abs(c) for c in coverage]  
 
     c_coverage = [coverage[p] for p in relpos]
@@ -133,9 +144,12 @@ def get_c_positions_and_coverage_in_window(chrom, start, end, strand, rdd, edit_
         d[p] = c
     return d
 
-def sum_all_c_coverage_in_window(chrom, start, stop, strand, rdd, edit_type, reverse=False):
+def sum_all_c_coverage_in_window(chrom, start, stop, strand, rdd, edit_type, reverse=False,
+                                 count_coverage_on_both_strands=False)
+                                ):
     all_coverage = 0
-    c_positions = get_c_positions_and_coverage_in_window(chrom, start, stop, strand, rdd, edit_type, reverse=reverse)
+    c_positions = get_c_positions_and_coverage_in_window(chrom, start, stop, strand, rdd, edit_type, 
+                                                         reverse=reverse, count_coverage_on_both_strands=count_coverage_on_both_strands)
 
     for pos, cov in c_positions.items():
         all_coverage += cov
@@ -238,7 +252,7 @@ def total_conversions_in_window(stamp_sites, chrom, start, end, strand, edit_typ
 
 
 def get_edit_c_info(t):
-    region_label, chrom, start, end, strand, edit_type, bam_path, reference_path, include_read_level_info, reverse = t
+    region_label, chrom, start, end, strand, edit_type, bam_path, reference_path, include_read_level_info, reverse, count_coverage_on_both_strands = t
     edit_fraction_info = {}
     
     d = ReadDensity(
@@ -248,7 +262,8 @@ def get_edit_c_info(t):
         
     chrom = str(chrom)
     total_conversions = total_conversions_in_window(stamp_sites, chrom, start, end, strand, edit_type)
-    total_target_bases = sum_all_c_coverage_in_window(chrom, start, end, strand, d, edit_type, reverse=reverse)
+    total_target_bases = sum_all_c_coverage_in_window(chrom, start, end, strand, d, edit_type, reverse=reverse,
+                                                      count_coverage_on_both_strands=count_coverage_on_both_strands)
 
     if total_target_bases == 0:
         fraction_bases_edited = 0
@@ -325,6 +340,7 @@ def load_json_info(input_json_filepath, regions_override=None):
     regions_for_edit_c = data.get('regions_for_edit_c')
     edit_type = data.get('edit_type')
     reverse = data.get('reverse', False)
+    count_coverage_on_both_strands = data.get('count_coverage_on_both_strands', False)
     
     edit_type = clean_edit_type_param(edit_type)
     
@@ -342,6 +358,7 @@ def load_json_info(input_json_filepath, regions_override=None):
     print("Regions being annotated: {}\n".format(regions_for_edit_c))
     print("Edit type?: {}".format(edit_type))
     print("Reverse coverage calculation?: {}".format(reverse))
+    print("Count coverage on both strands?: {}".format(count_coverage_on_both_strands))
     
     # Load STAMP Sites and regions to probe
     print('\n\nLoading STAMP sites...')
@@ -352,7 +369,7 @@ def load_json_info(input_json_filepath, regions_override=None):
     print('\n\nLoading regions to annotate with editC information -- should have following columns: region_id, chrom, start, end, strand')
     regions = pd.read_csv(regions_for_edit_c, sep='\t')
     
-    return output_folder,label, stamp_sites, forward_bw, reverse_bw, fasta, regions, edit_type, bam_path, reverse
+    return output_folder,label, stamp_sites, forward_bw, reverse_bw, fasta, regions, edit_type, bam_path, reverse, count_coverage_on_both_strands
 
 
 def keep_regions_with_edits(stamp_sites, regions_for_edit_c):
@@ -380,7 +397,7 @@ def print_time():
     print (now.strftime("%Y-%m-%d %H:%M:%S"))
 
     
-def edit_fraction(output_folder, label, forward_bw, reverse_bw, fasta, filtered_regions, bam_path, edit_type, include_read_level_info=False, outfile_override=False, cores=32, reverse=False):    
+def edit_fraction(output_folder, label, forward_bw, reverse_bw, fasta, filtered_regions, bam_path, edit_type, include_read_level_info=False, outfile_override=False, cores=32, reverse=False, count_coverage_on_both_strands=False):    
     region_ids = list(filtered_regions.region_id)
     chroms = list(filtered_regions.chrom)
     starts = list(filtered_regions.start)
@@ -391,7 +408,8 @@ def edit_fraction(output_folder, label, forward_bw, reverse_bw, fasta, filtered_
     reference_path_list = [fasta for i in range(len(filtered_regions))]
     include_read_level_info_list = [include_read_level_info for i in range(len(filtered_regions))]
     reverse_list = [reverse for i in range(len(filtered_regions))]
-        
+    count_coverage_on_both_strands_list = [count_coverage_on_both_strands for i in range(len(filtered_regions))]
+    
     print_time()
      # Set up a multi-processing pool to process each region individually and add editC information 
     print("\n\nCalculating edit fraction information for each region using multi-processing pool... this step could take a while (fastest when ppn = 8)")
@@ -402,7 +420,7 @@ def edit_fraction(output_folder, label, forward_bw, reverse_bw, fasta, filtered_
     num_processes = cores
 
     p = Pool(num_processes)
-    region_level_edit_c_dfs = p.map(get_edit_c_info, zip(region_ids, chroms, starts, ends, strands, edit_type_list, bam_path_list, reference_path_list, include_read_level_info_list, reverse_list))
+    region_level_edit_c_dfs = p.map(get_edit_c_info, zip(region_ids, chroms, starts, ends, strands, edit_type_list, bam_path_list, reference_path_list, include_read_level_info_list, reverse_list, count_coverage_on_both_strands_list))
     p.close()
     p.join()
 
@@ -532,7 +550,7 @@ if final_peaks:
 print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 print("Calculating Edit-C Region Baseline")
 print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-output_folder,label, stamp_sites, forward_bw, reverse_bw, fasta, regions, edit_type, bam_path, reverse = load_json_info(input_json, regions_override)
+output_folder,label, stamp_sites, forward_bw, reverse_bw, fasta, regions, edit_type, bam_path, reverse, count_coverage_on_both_strands = load_json_info(input_json, regions_override)
 
 print('Looking at {}>{} edits'.format(edit_type[0], edit_type[1]))
 
@@ -573,7 +591,9 @@ include_read_level_info = True
 if keep_all:
   include_read_level_info = False  
     
-window_edit_fractions = edit_fraction(output_folder,label, forward_bw, reverse_bw, fasta, filtered_regions, bam_path, edit_type=edit_type, outfile_override=outfile_override, include_read_level_info=include_read_level_info, cores=cores, reverse=reverse)
+window_edit_fractions = edit_fraction(output_folder,label, forward_bw, reverse_bw, fasta, filtered_regions, bam_path, edit_type=edit_type, outfile_override=outfile_override, include_read_level_info=include_read_level_info, cores=cores, reverse=reverse,
+                                      count_coverage_on_both_strands=count_coverage_on_both_strands
+                                     )
 window_edit_fractions['region_id'] = window_edit_fractions.index
 
 if not final_peaks:
@@ -591,7 +611,9 @@ if not final_peaks:
 
     collapsed_subregions = get_collapsed_subregions(gene_and_region_span)
     print("Analyzing edit fraction for {} collapsed subregions (ie introns and exons)...".format(len(collapsed_subregions)))
-    subregion_edit_fractions = edit_fraction(output_folder,label, forward_bw, reverse_bw, fasta, collapsed_subregions, bam_path, edit_type=edit_type, outfile_override=outfile_override, cores=cores, reverse=reverse)
+    subregion_edit_fractions = edit_fraction(output_folder,label, forward_bw, reverse_bw, fasta, collapsed_subregions, bam_path, edit_type=edit_type, outfile_override=outfile_override, cores=cores, reverse=reverse,
+                                             count_coverage_on_both_strands=count_coverage_on_both_strands
+                                            )
     region_counts, subregion_counts = get_dicts_for_region_and_subregion_data(subregion_edit_fractions)
     
     window_edit_fractions['subregion_coverage'],\
