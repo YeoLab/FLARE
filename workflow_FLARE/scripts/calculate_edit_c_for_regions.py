@@ -317,6 +317,7 @@ def load_stamp_sites(stamp_sites_filepath):
     stamp_sites = pd.read_csv(stamp_sites_filepath,
                                              sep='\t', names=['chrom_stamp', 'start_stamp', 'end_stamp', 'conf_stamp', 'coverage_stamp', 'strand_stamp', 
                                                               'geneid', 'genename', 'region', 'annot'])
+    stamp_sites = stamp_sites.drop_duplicates(['chrom_stamp', 'start_stamp', 'end_stamp', 'strand_stamp'])
     stamp_sites['num_edited_stamp'] = [int(float(i.split(',')[0])) for i in stamp_sites.coverage_stamp]
     stamp_sites['total_coverage_stamp'] = [int(float(i.split(',')[1])) for i in stamp_sites.coverage_stamp]
     return stamp_sites
